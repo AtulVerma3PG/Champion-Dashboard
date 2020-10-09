@@ -1,0 +1,46 @@
+button {
+  text-align: center;
+}
+.searchBar {
+  width: 20%;
+}
+
+.navText {
+  color: aqua;
+}
+p {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+.pageSize {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+Typeahead {
+  outline: none;
+  position: relative;
+}
+.btn-arrow-left {
+  position: relative;
+  padding-left: 18px;
+  padding-right: 18px;
+}
+.rbt {
+  padding: 15px;
+  margin: 10px 0 0;
+  outline: none;
+  position: relative;
+}
+Navbar {
+  width: 100%;
+}
+.rbt .form-control {
+  padding: 15px;
+  margin: 5px 0 0;
+  outline: none;
+}
+
+.rbt-token {
+  width: fit-content;
+}
