@@ -9,19 +9,19 @@ import "bootstrap/dist/css/bootstrap.min.css";
 class Champions extends Component {
   constructor(props) {
     super(props);
-    state = {
-      articles: [],
-      searches: [],
-      watchlist: [],
-      page: 1,
-      pageSize: 10,
-      articleLength: 50,
-      visibleArticles: [],
-      searched: [],
-      searchedText: "",
-    };
   }
-
+  state = {
+    articles: [],
+    searches: [],
+    watchlist: [],
+    page: 1,
+    pageSize: 10,
+    articleLength: 50,
+    visibleArticles: [],
+    searched: [],
+    searchedText: "",
+    sortBy: "Asc",
+  };
   componentDidMount() {
     if (this.props.location.state) {
       console.log(this.props.location.state);
@@ -179,7 +179,7 @@ class Champions extends Component {
   sortByAsc = (key) => {
     var arrayCopy = this.state.visibleArticles;
     arrayCopy.sort(this.compareByAsc(key));
-    this.setState({ articles: arrayCopy });
+    this.setState({ visibleArticles: arrayCopy });
     console.log(this.state.articles);
   };
   /**
@@ -190,7 +190,13 @@ class Champions extends Component {
   sortByDesc = (key) => {
     var arrayCopy = this.state.visibleArticles;
     arrayCopy.sort(this.compareByDesc(key));
-    this.setState({ articles: arrayCopy });
+    this.setState({ visibleArticles: arrayCopy });
+    console.log(this.state.articles);
+  };
+  sort = (key) => {
+    var arrayCopy = this.state.visibleArticles;
+    arrayCopy.sort(this.compareByDesc(key));
+    this.setState({ visibleArticles: arrayCopy });
     console.log(this.state.articles);
   };
   /**

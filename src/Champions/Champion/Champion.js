@@ -20,7 +20,7 @@ const championNumbers = [10, 20, 50];
  */
 const Champion = (props) => {
   const champLength = props.allChampions.length;
-  const pageSize = { props };
+  const pageSize = props.pageSize;
   const expectedDivisns = champLength / pageSize;
   // eslint-disable-next-line operator-linebreak
   const divisions =
@@ -37,7 +37,7 @@ const Champion = (props) => {
         onClick={() => props.setPage(number)}
       >
         {number}
-      </Pagination.Item>,
+      </Pagination.Item>
     );
   }
 
@@ -264,15 +264,15 @@ const Champion = (props) => {
 };
 
 Champion.propTypes = {
-  allChampions: PropTypes.InstanceOf(Array).isRequired,
-  champions: PropTypes.InstanceOf(Array).isRequired,
+  allChampions: PropTypes.array.isRequired,
+  champions: PropTypes.array.isRequired,
   setPageSize: PropTypes.func.isRequired,
   page: PropTypes.number.isRequired,
   pageSize: PropTypes.number.isRequired,
   setPage: PropTypes.func.isRequired,
   addToWatchList: PropTypes.func.isRequired,
   removeFromWatchlist: PropTypes.func.isRequired,
-  watchlist: PropTypes.InstanceOf(Array).isRequired,
+  watchlist: PropTypes.array.isRequired,
   openWatchlist: PropTypes.func.isRequired,
   firstPage: PropTypes.func.isRequired,
   lastPage: PropTypes.func.isRequired,
