@@ -1,3 +1,4 @@
+/* eslint-disable comma-dangle */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/destructuring-assignment */
@@ -20,7 +21,7 @@ const championNumbers = [10, 20, 50];
  */
 const Champion = (props) => {
   const champLength = props.allChampions.length;
-  const pageSize = props.pageSize;
+  const { pageSize } = props;
   const expectedDivisns = champLength / pageSize;
   // eslint-disable-next-line operator-linebreak
   const divisions =
@@ -264,15 +265,15 @@ const Champion = (props) => {
 };
 
 Champion.propTypes = {
-  allChampions: PropTypes.array.isRequired,
-  champions: PropTypes.array.isRequired,
+  allChampions: PropTypes.array.isRequired, // eslint-disable-line
+  champions: PropTypes.array.isRequired, // eslint-disable-line
   setPageSize: PropTypes.func.isRequired,
   page: PropTypes.number.isRequired,
   pageSize: PropTypes.number.isRequired,
   setPage: PropTypes.func.isRequired,
   addToWatchList: PropTypes.func.isRequired,
   removeFromWatchlist: PropTypes.func.isRequired,
-  watchlist: PropTypes.array.isRequired,
+  watchlist: PropTypes.array.isRequired, // eslint-disable-line
   openWatchlist: PropTypes.func.isRequired,
   firstPage: PropTypes.func.isRequired,
   lastPage: PropTypes.func.isRequired,
