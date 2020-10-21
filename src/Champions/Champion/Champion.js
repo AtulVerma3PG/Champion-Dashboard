@@ -1,11 +1,10 @@
 /* eslint-disable comma-dangle */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable react/destructuring-assignment */
 import React from "react";
 import PropTypes from "prop-types";
 import { Navbar, DropdownButton, Dropdown } from "react-bootstrap";
-
+import { Link } from "react-router-dom";
 import * as ReactBootStrap from "react-bootstrap";
 import Pagination from "react-bootstrap/Pagination";
 import SearchField from "react-search-field";
@@ -20,8 +19,11 @@ const championNumbers = [10, 20, 50];
  * @param {object} props The details of the champions grid as props
  */
 const Champion = (props) => {
-  const champLength = props.allChampions.length;
-  const { pageSize } = props;
+  const {
+    allChampions, pageSize, onSearchEnter, openWatchlist,
+    watchlist, searchedText, champions, firstPage, lastPage
+  } = props;
+  const champLength = allChampions.length;
   const expectedDivisns = champLength / pageSize;
   // eslint-disable-next-line operator-linebreak
   const divisions =
@@ -49,7 +51,7 @@ const Champion = (props) => {
 
         <p className="navText">Please select page size</p>
         <DropdownButton
-          title={props.pageSize}
+          title={pageSize}
           id="document-type"
           className="pageSize"
           onSelect={(e) => props.setPageSize(e)}
@@ -64,17 +66,17 @@ const Champion = (props) => {
           <button
             type="button"
             className="btn btn-primary btn-sm"
-            onClick={props.openWatchlist}
+            onClick={openWatchlist}
           >
-            Watchlist ({props.watchlist.length})
+            Watchlist ({watchlist.length})
           </button>
         </div>
       </Navbar>
 
       <SearchField
         placeholder="Search item"
-        value={props.searchedText}
-        onChange={props.onSearchEnter}
+        value={searchedText}
+        onChange={onSearchEnter}
       />
 
       <div>
@@ -207,16 +209,21 @@ const Champion = (props) => {
             </tr>
           </thead>
           <tbody>
-            {props.champions.map((champion) => (
+            {champions.map((champion) => (
               <tr key={champion.id}>
                 <td>
                   <img src={champion.image_url} alt={champion.image_url} />
                 </td>
                 <td>{champion.id}</td>
                 <td>
-                  <span onClick={() => props.openChampionDetails(champion)}>
+                  <Link
+                    to={{
+                      pathname: "/ChampionDetails",
+                      state: { champion },
+                    }}
+                  >
                     {champion.name}
-                  </span>
+                  </Link>
                 </td>
                 <td>{champion.armor}</td>
                 <td>{champion.armorperlevel}</td>
@@ -254,11 +261,13 @@ const Champion = (props) => {
             ))}
           </tbody>
         </ReactBootStrap.Table>
+        {searchedText === "" && (
         <Pagination>
-          <Pagination.First onClick={props.firstPage} />
+          <Pagination.First onClick={firstPage} />
           {items}
-          <Pagination.Last onClick={props.lastPage} />
+          <Pagination.Last onClick={lastPage} />
         </Pagination>
+        )}
       </div>
     </div>
   );
@@ -281,7 +290,6 @@ Champion.propTypes = {
   sortDesc: PropTypes.func.isRequired,
   onSearchEnter: PropTypes.func.isRequired,
   searchedText: PropTypes.string.isRequired,
-  openChampionDetails: PropTypes.func.isRequired,
 };
 
 export default Champion;

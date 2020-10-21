@@ -13,8 +13,8 @@ import { Link } from "react-router-dom";
 const Watchlist = (props) => {
   const champions = _.get(props, "location.state.watchlist");
   const state = _.get(props, "location.state");
-  const { history } = { props };
-  const { location } = { props };
+  const { history } = props;
+  const { location } = props;
   const openHome = () => {
     history.push("/", location.state.watchlist);
   };
@@ -65,7 +65,7 @@ const Watchlist = (props) => {
               <td>
                 <Link
                   to={{
-                    pathname: "/",
+                    pathname: "/ChampionDetails",
                     state: { champion },
                   }}
                 >
@@ -87,6 +87,11 @@ const Watchlist = (props) => {
       </ReactBootStrap.Table>
     </div>
   );
+};
+
+Watchlist.propTypes = {
+  location: Object.isRequired,
+  history: Object.isRequired,
 };
 
 export default Watchlist;

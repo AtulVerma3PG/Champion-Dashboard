@@ -1,9 +1,10 @@
 import React from "react";
+import PropTypes from "prop-types";
 import * as ReactBootStrap from "react-bootstrap";
 
 const ChampionDetail = (props) => {
-  const location = { props };
-  const champion = location.state;
+  const { location } = props;
+  const { champion } = location.state;
   return (
     <div className="container">
       <h2>Champion Detail</h2>
@@ -207,6 +208,10 @@ const ChampionDetail = (props) => {
       </ReactBootStrap.Table>
     </div>
   );
+};
+
+ChampionDetail.propTypes = {
+  location: PropTypes.object.isRequired,
 };
 
 export default ChampionDetail;
