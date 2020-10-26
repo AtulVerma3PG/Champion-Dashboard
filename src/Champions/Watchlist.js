@@ -11,20 +11,11 @@ import { Link } from "react-router-dom";
  * @param {object} props Watchlist details
  */
 const Watchlist = (props) => {
-  let champions = _.get(props, "location.state.watchlist");
+  const champions = _.get(props, "location.state.watchlist");
   const state = _.get(props, "location.state");
   const { history } = props;
   const openHome = () => {
     history.push("/", champions);
-  };
-  /**
-   *Remove Champion from Watchlist
-   *
-   * @param {Array} event Champion to remove from Watchlist
-   */
-  const removeFromWatchlist = (event) => {
-    const watchlist = champions;
-    champions = watchlist.filter((e) => e.id !== event);
   };
   return (
     <div>
@@ -60,7 +51,6 @@ const Watchlist = (props) => {
             <th>hpregenperlevel</th>
             <th>movespeed</th>
             <th>mp</th>
-            <th>WatchList Action</th>
           </tr>
         </thead>
         <tbody>
@@ -89,17 +79,6 @@ const Watchlist = (props) => {
               <td>{champion.hpregenperlevel}</td>
               <td>{champion.movespeed}</td>
               <td>{champion.mp}</td>
-              <td>
-                <div>
-                  <button
-                    type="button"
-                    className="btn btn-primary btn-sm"
-                    onClick={() => removeFromWatchlist(champion.id)}
-                  >
-                    Remove
-                  </button>
-                </div>
-              </td>
             </tr>
           ))}
         </tbody>
