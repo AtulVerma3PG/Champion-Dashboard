@@ -65,7 +65,7 @@ const Champion = (props) => {
         <div>
           <button
             type="button"
-            className="btn btn-primary btn-sm"
+            className="btn btn-primary btn-lg"
             onClick={openWatchlist}
           >
             Watchlist ({watchlist.length})

@@ -1,21 +1,32 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { Navbar } from "react-bootstrap";
 import * as ReactBootStrap from "react-bootstrap";
 
 const ChampionDetail = (props) => {
   const { location } = props;
+  const { history } = props;
   const { champion } = location.state;
+  const openHome = () => {
+    // debugger;
+    history.push("/");
+  };
+
   return (
     <div className="container">
-      <h2>Champion Detail</h2>
-      <br />
-      <br />
-      <br />
-
+      <Navbar bg="dark" variant="dark">
+        <Navbar.Brand>My Watchlist</Navbar.Brand>
+        <button
+          type="button"
+          className="btn btn-primary btn-lg"
+          onClick={openHome}
+        >
+          Home
+        </button>
+      </Navbar>
       <ReactBootStrap.Table responsive="lg" striped bordered hover>
         <thead>
           <th colSpan="2">
-            <img src={champion.image_url} alt={champion.image_url} />
+            <img src={champion.big_image_url} alt={champion.big_image_url} />
           </th>
         </thead>
         <tbody>
@@ -211,7 +222,8 @@ const ChampionDetail = (props) => {
 };
 
 ChampionDetail.propTypes = {
-  location: PropTypes.object.isRequired,
+  location: Object.isRequired,
+  history: Object.isRequired,
 };
 
 export default ChampionDetail;

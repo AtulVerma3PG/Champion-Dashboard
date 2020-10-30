@@ -2,39 +2,32 @@ import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Champion from "./Champion/Champion";
 
+const initialState = {
+  articles: [],
+  searches: [],
+  watchlist: [],
+  page: 1,
+  pageSize: 10,
+  articleLength: 50,
+  visibleArticles: [],
+  searchedText: "",
+  champion: [],
+  sortBy: "Asc",
+};
 /**
  * Main Component containing logic for champion Dashboard
  */
 class Champions extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      articles: [],
-      searches: [],
-      watchlist: [],
-      page: 1,
-      pageSize: 10,
-      articleLength: 50,
-      visibleArticles: [],
-      searchedText: "",
-      sortBy: "Asc",
-    };
+    this.state = JSON.parse(localStorage.getItem("state"))
+      ? JSON.parse(localStorage.getItem("state"))
+      : initialState;
   }
 
   componentDidMount() {
-    const { location } = this.props;
-    if (location.state) {
-      this.setState({
-        articles: location.state.articles,
-        searches: location.state.searches,
-        watchlist: location.state.watchlist,
-        page: location.state.page,
-        pageSize: Number(location.state.pageSize),
-        articleLength: location.state.articleLength,
-        visibleArticles: location.state.visibleArticles,
-        searchedText: location.state.searchedText,
-      });
-    } else {
+    const { articles } = this.state;
+    if (articles.length === 0) {
       const defaultAPI = "https://api.pandascore.co/lol/champions?page[number]=&page[size]=&token=h1uX-wC3YOCMRJRUGQIXQ2y2vGwEnYlrKYPdrStNUnI01Ew63a4";
       const { pageSize } = this.state;
       fetch(defaultAPI)
@@ -44,6 +37,10 @@ class Champions extends Component {
           visibleArticles: data.slice(0, pageSize),
           articleLength: data.length,
         }));
+      localStorage.clear();
+    } else {
+      const { page } = this.state;
+      this.setPage(page);
     }
   }
 
@@ -60,6 +57,7 @@ class Champions extends Component {
       visibleArticles: cropsArticles,
       page: 1,
     });
+    this.updateLocalStorage();
   };
 
   /**
@@ -83,7 +81,8 @@ class Champions extends Component {
     this.setState({
       page: event,
       visibleArticles: articles,
-    });
+      searchedText: "",
+    }, () => this.updateLocalStorage());
   };
 
   /**
@@ -96,7 +95,9 @@ class Champions extends Component {
     watchlist.push(event);
     this.setState({
       watchlist,
+      searchedText: "",
     });
+    this.updateLocalStorage();
   };
 
   /**
@@ -109,6 +110,7 @@ class Champions extends Component {
     this.setState({
       watchlist: watchlist.filter((e) => e.id !== event),
     });
+    this.updateLocalStorage();
   };
 
   /**
@@ -118,7 +120,6 @@ class Champions extends Component {
     const { history } = this.props;
     history.push({
       pathname: "/ChampionWatchlist",
-      state: { ...this.state },
     });
   };
 
@@ -129,6 +130,7 @@ class Champions extends Component {
     this.setState({
       page: 1,
     });
+    this.updateLocalStorage();
     this.setPage(1);
   };
 
@@ -145,6 +147,7 @@ class Champions extends Component {
     this.setState({
       page: divisions,
     });
+    this.updateLocalStorage();
     this.setPage(divisions);
   };
 
@@ -188,6 +191,7 @@ class Champions extends Component {
     const arrayCopy = visibleArticles;
     arrayCopy.sort(this.compareByAsc(key));
     this.setState({ visibleArticles: arrayCopy });
+    this.updateLocalStorage();
   };
 
   /**
@@ -199,12 +203,14 @@ class Champions extends Component {
     const { visibleArticles } = this.state;
     visibleArticles.sort(this.compareByDesc(key));
     this.setState({ visibleArticles });
+    this.updateLocalStorage();
   };
 
   sort = (key) => {
     const { visibleArticles } = this.state;
     visibleArticles.sort(this.compareByDesc(key));
     this.setState({ visibleArticles });
+    this.updateLocalStorage();
   };
 
   /**
@@ -219,10 +225,11 @@ class Champions extends Component {
       this.setState({
         searchedText: event,
         searches: champ,
-      });
-      this.setState({
         visibleArticles: champ,
       });
+      // this.setState({
+      //   visibleArticles: champ,
+      // });
     } else {
       this.setState({
         searchedText: "",
@@ -230,6 +237,7 @@ class Champions extends Component {
       });
       this.setPage(page);
     }
+    this.updateLocalStorage();
   };
 
   /**
@@ -238,11 +246,22 @@ class Champions extends Component {
    */
   openChampionDetails = (champion) => {
     const { history } = this.props;
-    history.push({
-      pathname: "/ChampionDetails",
-      state: champion,
+    this.setState({
+      champion,
+    }, () => {
+      this.updateLocalStorage();
+      history.push({
+        pathname: "/ChampionDetails",
+      });
     });
   };
+
+  /**
+   * Update Local storage on state change
+   */
+  updateLocalStorage() {
+    localStorage.setItem("state", JSON.stringify(this.state));
+  }
 
   render() {
     const {
@@ -280,6 +299,5 @@ class Champions extends Component {
 
 Champions.propTypes = {
   history: Object.isRequired,
-  location: Object.isRequired,
 };
 export default Champions;

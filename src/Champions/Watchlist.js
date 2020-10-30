@@ -1,7 +1,6 @@
 import React from "react";
 import { Navbar } from "react-bootstrap";
 import * as ReactBootStrap from "react-bootstrap";
-import _ from "lodash";
 import "./Css/Champion.css";
 import { Link } from "react-router-dom";
 
@@ -11,12 +10,22 @@ import { Link } from "react-router-dom";
  * @param {object} props Watchlist details
  */
 const Watchlist = (props) => {
-  const champions = _.get(props, "location.state.watchlist");
-  const state = _.get(props, "location.state");
+  const state = JSON.parse(localStorage.getItem("state"));
+  const { watchlist } = state;
   const { history } = props;
   const openHome = () => {
-    history.push("/", champions);
+    history.push("/");
   };
+
+  /**
+   * Update Local storage on state change
+   */
+  const removeChampion = (event) => {
+    state.watchlist = watchlist.filter((e) => e.id !== event);
+    localStorage.setItem("state", JSON.stringify(state));
+    window.location.reload(false);
+  };
+
   return (
     <div>
       <Navbar bg="dark" variant="dark">
@@ -29,7 +38,7 @@ const Watchlist = (props) => {
         >
           <button
             type="button"
-            className="btn btn-primary btn-sm"
+            className="btn btn-primary btn-lg"
             onClick={openHome}
           >
             Home
@@ -51,10 +60,11 @@ const Watchlist = (props) => {
             <th>hpregenperlevel</th>
             <th>movespeed</th>
             <th>mp</th>
+            <th>WatchList Action</th>
           </tr>
         </thead>
         <tbody>
-          {champions.map((champion) => (
+          {watchlist.map((champion) => (
             <tr key={champion.id}>
               <td>
                 <img src={champion.image_url} alt={champion.image_url} />
@@ -79,6 +89,17 @@ const Watchlist = (props) => {
               <td>{champion.hpregenperlevel}</td>
               <td>{champion.movespeed}</td>
               <td>{champion.mp}</td>
+              <td>
+                <div>
+                  <button
+                    type="button"
+                    className="btn btn-primary btn-sm"
+                    onClick={() => removeChampion(champion.id)}
+                  >
+                    Remove
+                  </button>
+                </div>
+              </td>
             </tr>
           ))}
         </tbody>
