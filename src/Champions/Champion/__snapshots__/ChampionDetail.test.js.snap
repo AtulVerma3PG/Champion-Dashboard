@@ -1,0 +1,245 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App Snapshot test 1`] = `
+<div
+  className="container"
+>
+  <nav
+    className="navbar navbar-expand navbar-dark bg-dark"
+  >
+    <span
+      className="navbar-brand"
+    >
+      My Watchlist
+    </span>
+    <button
+      className="btn btn-primary btn-lg"
+      onClick={[Function]}
+      type="button"
+    >
+      Home
+    </button>
+  </nav>
+  <div
+    className="table-responsive-lg"
+  >
+    <table
+      className="table table-striped table-bordered table-hover"
+    >
+      <thead>
+        <th
+          colSpan="2"
+        >
+          <img />
+        </th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            id 
+          </td>
+          <td>
+             
+             
+          </td>
+        </tr>
+        <tr>
+          <td>
+            name 
+          </td>
+          <td>
+             
+             
+          </td>
+        </tr>
+        <tr>
+          <td>
+            armor 
+          </td>
+          <td>
+             
+             
+          </td>
+        </tr>
+        <tr>
+          <td>
+            armorperlevel 
+          </td>
+          <td>
+             
+             
+          </td>
+        </tr>
+        <tr>
+          <td>
+            attackdamage 
+          </td>
+          <td>
+             
+             
+          </td>
+        </tr>
+        <tr>
+          <td>
+            attackdamageperlevel 
+          </td>
+          <td>
+             
+             
+          </td>
+        </tr>
+        <tr>
+          <td>
+            attackrange 
+          </td>
+          <td>
+             
+             
+          </td>
+        </tr>
+        <tr>
+          <td>
+            attackspeedoffset 
+          </td>
+          <td>
+             
+             
+          </td>
+        </tr>
+        <tr>
+          <td>
+            attackspeedperlevel 
+          </td>
+          <td>
+             
+             
+          </td>
+        </tr>
+        <tr>
+          <td>
+            crit 
+          </td>
+          <td>
+             
+             
+          </td>
+        </tr>
+        <tr>
+          <td>
+            critperlevel 
+          </td>
+          <td>
+             
+             
+          </td>
+        </tr>
+        <tr>
+          <td>
+            hp 
+          </td>
+          <td>
+             
+             
+          </td>
+        </tr>
+        <tr>
+          <td>
+            hpperlevel 
+          </td>
+          <td>
+             
+             
+          </td>
+        </tr>
+        <tr>
+          <td>
+            hpregen 
+          </td>
+          <td>
+             
+             
+          </td>
+        </tr>
+        <tr>
+          <td>
+            hpregenperlevel 
+          </td>
+          <td>
+             
+             
+          </td>
+        </tr>
+        <tr>
+          <td>
+            movespeed 
+          </td>
+          <td>
+             
+             
+          </td>
+        </tr>
+        <tr>
+          <td>
+            mp 
+          </td>
+          <td>
+             
+             
+          </td>
+        </tr>
+        <tr>
+          <td>
+            mpperlevel 
+          </td>
+          <td>
+             
+             
+          </td>
+        </tr>
+        <tr>
+          <td>
+            mpregen 
+          </td>
+          <td>
+             
+             
+          </td>
+        </tr>
+        <tr>
+          <td>
+            mpregenperlevel 
+          </td>
+          <td>
+             
+             
+          </td>
+        </tr>
+        <tr>
+          <td>
+            spellblock 
+          </td>
+          <td>
+             
+             
+          </td>
+        </tr>
+        <tr>
+          <td>
+            spellblockperlevel 
+          </td>
+          <td>
+             
+             
+          </td>
+        </tr>
+        <tr>
+          <td>
+            videogame_versions
+          </td>
+          <td />
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+`;

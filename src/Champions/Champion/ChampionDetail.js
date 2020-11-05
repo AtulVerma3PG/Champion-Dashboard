@@ -212,7 +212,7 @@ const ChampionDetail = (props) => {
           <tr>
             <td>videogame_versions</td>
             <td>
-              {champion.videogame_versions.map((version) => `${version} ,`)}
+              {champion.videogame_versions && champion.videogame_versions.map((version) => `${version} ,`)}
             </td>
           </tr>
         </tbody>

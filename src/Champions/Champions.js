@@ -23,9 +23,6 @@ class Champions extends Component {
     this.state = JSON.parse(localStorage.getItem("state"))
       ? JSON.parse(localStorage.getItem("state"))
       : initialState;
-  }
-
-  componentDidMount() {
     const { articles } = this.state;
     if (articles.length === 0) {
       const defaultAPI = "https://api.pandascore.co/lol/champions?page[number]=&page[size]=&token=h1uX-wC3YOCMRJRUGQIXQ2y2vGwEnYlrKYPdrStNUnI01Ew63a4";
@@ -120,6 +117,7 @@ class Champions extends Component {
     const { history } = this.props;
     history.push({
       pathname: "/ChampionWatchlist",
+      state: { ...this.state },
     });
   };
 

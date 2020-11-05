@@ -1,12 +1,13 @@
 /* eslint-disable */
 import React from "react";
 import renderer from "react-test-renderer";
-import App from "./App";
+import Champions from "./Champions";
 
-test("App Snapshot test", () => {
+test("Champions Snapshot test", () => {
   const component = renderer.create(
-    <App />,
+    <Champions />,
   );
   const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
+

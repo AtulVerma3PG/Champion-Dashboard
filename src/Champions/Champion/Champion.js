@@ -21,15 +21,13 @@ const championNumbers = [10, 20, 50];
 const Champion = (props) => {
   const {
     allChampions, pageSize, onSearchEnter, openWatchlist,
-    watchlist, searchedText, champions, firstPage, lastPage
+    watchlist, searchedText, champions, firstPage, lastPage, setPageSize
   } = props;
   const champLength = allChampions.length;
   const expectedDivisns = champLength / pageSize;
-  // eslint-disable-next-line operator-linebreak
-  const divisions =
-    champLength % pageSize == 0
-      ? expectedDivisns
-      : Math.floor(expectedDivisns) + 1;
+  const divisions = champLength % pageSize == 0
+    ? expectedDivisns
+    : Math.floor(expectedDivisns) + 1;
   const items = [];
   for (let number = 1; number <= divisions; number += 1) {
     // Adding Pagination
@@ -54,7 +52,7 @@ const Champion = (props) => {
           title={pageSize}
           id="document-type"
           className="pageSize"
-          onSelect={(e) => props.setPageSize(e)}
+          onSelect={(e) => setPageSize(e)}
         >
           {championNumbers.map((opt) => (
             <Dropdown.Item as="button" eventKey={opt} key={opt}>
@@ -66,6 +64,7 @@ const Champion = (props) => {
           <button
             type="button"
             className="btn btn-primary btn-lg"
+            id="openWatchlist"
             onClick={openWatchlist}
           >
             Watchlist ({watchlist.length})

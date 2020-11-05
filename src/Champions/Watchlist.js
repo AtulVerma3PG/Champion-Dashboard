@@ -10,7 +10,9 @@ import { Link } from "react-router-dom";
  * @param {object} props Watchlist details
  */
 const Watchlist = (props) => {
-  const state = JSON.parse(localStorage.getItem("state"));
+  // const state = JSON.parse(localStorage.getItem("state"));
+  const { location } = props;
+  const { state } = location;
   const { watchlist } = state;
   const { history } = props;
   const openHome = () => {
@@ -30,20 +32,13 @@ const Watchlist = (props) => {
     <div>
       <Navbar bg="dark" variant="dark">
         <Navbar.Brand>My Watchlist</Navbar.Brand>
-        <Link
-          to={{
-            pathname: "/",
-            state,
-          }}
+        <button
+          type="button"
+          className="btn btn-primary btn-lg"
+          onClick={openHome}
         >
-          <button
-            type="button"
-            className="btn btn-primary btn-lg"
-            onClick={openHome}
-          >
-            Home
-          </button>
-        </Link>
+          Home
+        </button>
       </Navbar>
       <ReactBootStrap.Table responsive="md" bordered hover>
         <thead>
@@ -110,6 +105,7 @@ const Watchlist = (props) => {
 
 Watchlist.propTypes = {
   history: Object.isRequired,
+  location: Object.isRequired,
 };
 
 export default Watchlist;
