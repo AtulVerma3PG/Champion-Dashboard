@@ -138,7 +138,7 @@ class Champions extends Component {
   setLastPage = () => {
     const { articles } = this.state;
     const { pageSize } = this.state;
-    const divisions = articles.length % pageSize == 0
+    const divisions = articles.length % pageSize === 0
       ? articles.length / pageSize
       : Math.floor(articles.length / pageSize + 1);
 

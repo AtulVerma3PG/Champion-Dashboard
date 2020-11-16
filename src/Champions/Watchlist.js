@@ -10,9 +10,7 @@ import { Link } from "react-router-dom";
  * @param {object} props Watchlist details
  */
 const Watchlist = (props) => {
-  // const state = JSON.parse(localStorage.getItem("state"));
-  const { location } = props;
-  const { state } = location;
+  const state = JSON.parse(localStorage.getItem("state"));
   const { watchlist } = state;
   const { history } = props;
   const openHome = () => {
@@ -105,7 +103,6 @@ const Watchlist = (props) => {
 
 Watchlist.propTypes = {
   history: Object.isRequired,
-  location: Object.isRequired,
 };
 
 export default Watchlist;
