@@ -1,10 +1,12 @@
-/* eslint-disable comma-dangle */
+/* eslint-disable linebreak-style */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from "react";
 import PropTypes from "prop-types";
 import { Navbar, DropdownButton, Dropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSortUp, faSortDown } from "@fortawesome/free-solid-svg-icons";
 import * as ReactBootStrap from "react-bootstrap";
 import Pagination from "react-bootstrap/Pagination";
 import SearchField from "react-search-field";
@@ -21,7 +23,7 @@ const championNumbers = [10, 20, 50];
 const Champion = (props) => {
   const {
     allChampions, pageSize, onSearchEnter, openWatchlist,
-    watchlist, searchedText, champions, firstPage, lastPage, setPageSize
+    watchlist, searchedText, champions, firstPage, lastPage, setPageSize, sortBy, sortOn,
   } = props;
   const champLength = allChampions.length;
   const expectedDivisns = champLength / pageSize;
@@ -38,7 +40,7 @@ const Champion = (props) => {
         onClick={() => props.setPage(number)}
       >
         {number}
-      </Pagination.Item>
+      </Pagination.Item>,
     );
   }
 
@@ -79,130 +81,39 @@ const Champion = (props) => {
       />
 
       <div>
-        <ReactBootStrap.Table responsive="md" bordered hover>
+        <ReactBootStrap.Table responsive="md" stripped bordered hover>
           <thead>
             <tr>
               <th>Champion Profile</th>
               <th>
                 Champion ID
                 <br />
-                <span
-                  onClick={() => props.sortAsc("id")}
-                  className="glyphicon glyphicon-sort-by-attributes"
-                />{" "}
-                <span
-                  onClick={() => props.sortDesc("id")}
-                  className="glyphicon glyphicon-sort-by-attributes-alt"
-                />
+                <FontAwesomeIcon icon={faSortUp} style={sortBy == "Asc" && sortOn == "id" ? { color: "#FF0000" } : { color: "black" }} size="2x" onClick={() => props.sortAsc("id")} />
+                <FontAwesomeIcon icon={faSortDown} style={sortBy == "Desc" && sortOn == "id" ? { color: "#FF0000" } : { color: "black" }} size="2x" onClick={() => props.sortDesc("id")} />
               </th>
               <th>
                 Name
                 <br />
-                <span
-                  onClick={() => props.sortAsc("name")}
-                  className="glyphicon glyphicon-sort-by-attributes"
-                />{" "}
-                <span
-                  onClick={() => props.sortDesc("name")}
-                  className="glyphicon glyphicon-sort-by-attributes-alt"
-                />
+                <FontAwesomeIcon icon={faSortUp} style={sortBy == "Asc" && sortOn == "name" ? { color: "#FF0000" } : { color: "black" }} size="2x" onClick={() => props.sortAsc("name")} />
+                <FontAwesomeIcon icon={faSortDown} style={sortBy == "Desc" && sortOn == "name" ? { color: "#FF0000" } : { color: "black" }} size="2x" onClick={() => props.sortDesc("name")} />
               </th>
               <th>
                 Armor
                 <br />
-                <span
-                  onClick={() => props.sortAsc("armor")}
-                  className="glyphicon glyphicon-sort-by-attributes"
-                />{" "}
-                <span
-                  onClick={() => props.sortDesc("armor")}
-                  className="glyphicon glyphicon-sort-by-attributes-alt"
-                />
+                <FontAwesomeIcon icon={faSortUp} style={sortBy == "Asc" && sortOn == "armor" ? { color: "#FF0000" } : { color: "black" }} size="2x" onClick={() => props.sortAsc("armor")} />
+                <FontAwesomeIcon icon={faSortDown} style={sortBy == "Desc" && sortOn == "armor" ? { color: "#FF0000" } : { color: "black" }} size="2x" onClick={() => props.sortDesc("armor")} />
               </th>
               <th>
                 armorperlevel
                 <br />
-                <span
-                  onClick={() => props.sortAsc("armorperlevel")}
-                  className="glyphicon glyphicon-sort-by-attributes"
-                />{" "}
-                <span
-                  onClick={() => props.sortDesc("armorperlevel")}
-                  className="glyphicon glyphicon-sort-by-attributes-alt"
-                  key="armorperlevel"
-                />
-              </th>
-              <th>
-                attackdamage
-                <br />
-                <span
-                  onClick={() => props.sortAsc("attackdamage")}
-                  className="glyphicon glyphicon-sort-by-attributes"
-                />{" "}
-                <span
-                  onClick={() => props.sortDesc("attackdamage")}
-                  className="glyphicon glyphicon-sort-by-attributes-alt"
-                />
+                <FontAwesomeIcon icon={faSortUp} style={sortBy == "Asc" && sortOn == "armorperlevel" ? { color: "#FF0000" } : { color: "black" }} size="2x" onClick={() => props.sortAsc("armorperlevel")} />
+                <FontAwesomeIcon icon={faSortDown} style={sortBy == "Desc" && sortOn == "armorperlevel" ? { color: "#FF0000" } : { color: "black" }} size="2x" onClick={() => props.sortDesc("armorperlevel")} />
               </th>
               <th>
                 hp
                 <br />
-                <span
-                  onClick={() => props.sortAsc("hp")}
-                  className="glyphicon glyphicon-sort-by-attributes"
-                />{" "}
-                <span
-                  onClick={() => props.sortDesc("hp")}
-                  className="glyphicon glyphicon-sort-by-attributes-alt"
-                />
-              </th>
-              <th>
-                hpperlevel
-                <br />
-                <span
-                  onClick={() => props.sortAsc("hpperlevel")}
-                  className="glyphicon glyphicon-sort-by-attributes"
-                />{" "}
-                <span
-                  onClick={() => props.sortDesc("hpperlevel")}
-                  className="glyphicon glyphicon-sort-by-attributes-alt"
-                />
-              </th>
-              <th>
-                hpregen
-                <br />
-                <span
-                  onClick={() => props.sortAsc("hpregen")}
-                  className="glyphicon glyphicon-sort-by-attributes"
-                />{" "}
-                <span
-                  onClick={() => props.sortDesc("hpregen")}
-                  className="glyphicon glyphicon-sort-by-attributes-alt"
-                />
-              </th>
-              <th>
-                movespeed
-                <br />
-                <span
-                  onClick={() => props.sortAsc("movespeed")}
-                  className="glyphicon glyphicon-sort-by-attributes"
-                />{" "}
-                <span
-                  onClick={() => props.sortDesc("movespeed")}
-                  className="glyphicon glyphicon-sort-by-attributes-alt"
-                />
-              </th>
-              <th>
-                mp
-                <br />
-                <span
-                  onClick={() => props.sortAsc("mp")}
-                  className="glyphicon glyphicon-sort-by-attributes"
-                />{" "}
-                <span
-                  onClick={() => props.sortDesc("mp")}
-                  className="glyphicon glyphicon-sort-by-attributes-alt"
-                />
+                <FontAwesomeIcon icon={faSortUp} style={sortBy == "Asc" && sortOn == "hp" ? { color: "#FF0000" } : { color: "black" }} size="2x" onClick={() => props.sortAsc("hp")} />
+                <FontAwesomeIcon icon={faSortDown} style={sortBy == "Desc" && sortOn == "hp" ? { color: "#FF0000" } : { color: "black" }} size="2x" onClick={() => props.sortDesc("hp")} />
               </th>
               <th>WatchList Action</th>
             </tr>
@@ -226,19 +137,14 @@ const Champion = (props) => {
                 </td>
                 <td>{champion.armor}</td>
                 <td>{champion.armorperlevel}</td>
-                <td>{champion.attackdamage}</td>
                 <td>{champion.hp}</td>
-                <td>{champion.hpperlevel}</td>
-                <td>{champion.hpregen}</td>
-                <td>{champion.movespeed}</td>
-                <td>{champion.mp}</td>
                 <td>
                   <div>
                     {props.watchlist.filter((e) => e.id === champion.id)
                       .length == "0" && (
                       <button
                         type="button"
-                        className="btn btn-primary btn-sm"
+                        className="btn btn-primary btn-lg"
                         onClick={() => props.addToWatchList(champion)}
                       >
                         Add
@@ -248,7 +154,7 @@ const Champion = (props) => {
                       .length == "1" && (
                       <button
                         type="button"
-                        className="btn btn-primary btn-sm"
+                        className="btn btn-primary btn-lg"
                         onClick={() => props.removeFromWatchlist(champion.id)}
                       >
                         Remove
@@ -278,6 +184,8 @@ Champion.propTypes = {
   setPageSize: PropTypes.func.isRequired,
   page: PropTypes.number.isRequired,
   pageSize: PropTypes.number.isRequired,
+  sortBy: PropTypes.string.isRequired,
+  sortOn: PropTypes.string.isRequired,
   setPage: PropTypes.func.isRequired,
   addToWatchList: PropTypes.func.isRequired,
   removeFromWatchlist: PropTypes.func.isRequired,

@@ -44,3 +44,14 @@ Navbar {
 .rbt-token {
   width: fit-content;
 }
+
+.fahover {
+  color: aqua;
+}
+td {
+  font-size: 16px;
+}
+th {
+  font-size: 18px;
+  text-align: center;
+}

@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Champion from "./Champion/Champion";
@@ -12,8 +13,10 @@ const initialState = {
   visibleArticles: [],
   searchedText: "",
   champion: [],
-  sortBy: "Asc",
+  sortBy: "",
+  sortOn: "name",
 };
+const token = "h1uX-wC3YOCMRJRUGQIXQ2y2vGwEnYlrKYPdrStNUnI01Ew63a4";
 /**
  * Main Component containing logic for champion Dashboard
  */
@@ -25,7 +28,7 @@ class Champions extends Component {
       : initialState;
     const { articles } = this.state;
     if (articles.length === 0) {
-      const defaultAPI = "https://api.pandascore.co/lol/champions?page[number]=&page[size]=&token=h1uX-wC3YOCMRJRUGQIXQ2y2vGwEnYlrKYPdrStNUnI01Ew63a4";
+      const defaultAPI = `https://api.pandascore.co/lol/champions?page[number]=&page[size]=&token=${token}`;
       const { pageSize } = this.state;
       fetch(defaultAPI)
         .then((response) => response.json())
@@ -70,15 +73,14 @@ class Champions extends Component {
     const { pageSize } = this.state;
     const { articleLength } = this.state;
     const pageSkip = (event - 1) * pageSize;
-    const pageEndExpected = pageSkip + pageSize;
+    const pageEndExpected = +pageSkip + +pageSize;
     const pageEnd = pageEndExpected > articleLength
       ? articleLength
-      : pageSkip + pageSize;
+      : +pageSkip + +pageSize;
     articles = articles.slice(pageSkip, pageEnd);
     this.setState({
       page: event,
       visibleArticles: articles,
-      searchedText: "",
     }, () => this.updateLocalStorage());
   };
 
@@ -185,10 +187,10 @@ class Champions extends Component {
    * @param {string} key element to be sorted Ascending
    */
   sortByAsc = (key) => {
-    const { visibleArticles } = this.state;
-    const arrayCopy = visibleArticles;
-    arrayCopy.sort(this.compareByAsc(key));
-    this.setState({ visibleArticles: arrayCopy });
+    const { articles, page } = this.state;
+    articles.sort(this.compareByAsc(key));
+    this.setState({ articles, sortBy: "Asc", sortOn: key });
+    this.setPage(page);
     this.updateLocalStorage();
   };
 
@@ -198,9 +200,10 @@ class Champions extends Component {
    * @param {string} key element to be sorted Descending
    */
   sortByDesc = (key) => {
-    const { visibleArticles } = this.state;
-    visibleArticles.sort(this.compareByDesc(key));
-    this.setState({ visibleArticles });
+    const { articles, page } = this.state;
+    articles.sort(this.compareByDesc(key));
+    this.setState({ articles, sortBy: "Desc", sortOn: key });
+    this.setPage(page);
     this.updateLocalStorage();
   };
 
@@ -217,23 +220,21 @@ class Champions extends Component {
    * @param {string} event text typed for searching
    */
   searchEnter = (event) => {
-    const { articles, page } = this.state;
+    const { page } = this.state;
     if (event !== "") {
-      const champ = articles.filter((c) => c.name.toLowerCase().startsWith(event.toLowerCase()));
-      this.setState({
-        searchedText: event,
-        searches: champ,
-        visibleArticles: champ,
-      });
-      // this.setState({
-      //   visibleArticles: champ,
-      // });
+      const defaultAPI = `https://api.pandascore.co/lol/champions?search[name]=${event}&token=h1uX-wC3YOCMRJRUGQIXQ2y2vGwEnYlrKYPdrStNUnI01Ew63a4`;
+      fetch(defaultAPI)
+        .then((response) => response.json())
+        .then((data) => this.setState({
+          searches: data,
+          visibleArticles: data,
+          searchedText: event,
+        }));
     } else {
       this.setState({
         searchedText: "",
         searches: [],
-      });
-      this.setPage(page);
+      }, () => this.setPage(page));
     }
     this.updateLocalStorage();
   };
@@ -263,7 +264,7 @@ class Champions extends Component {
 
   render() {
     const {
-      articles, visibleArticles, page, pageSize, watchlist, searchedText,
+      articles, visibleArticles, page, pageSize, watchlist, searchedText, sortBy, sortOn,
     } = this.state;
     return (
       <div>
@@ -285,6 +286,8 @@ class Champions extends Component {
             sortAsc={this.sortByAsc}
             onSearchEnter={this.searchEnter}
             searchedText={searchedText}
+            sortBy={sortBy}
+            sortOn={sortOn}
             openChampionDetails={this.openChampionDetails}
           />
         ) : (

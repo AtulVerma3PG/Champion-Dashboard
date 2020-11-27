@@ -28,7 +28,10 @@ const Watchlist = (props) => {
 
   return (
     <div>
-      <Navbar bg="dark" variant="dark">
+      <Navbar
+        bg="dark"
+        variant="dark"
+      >
         <Navbar.Brand>My Watchlist</Navbar.Brand>
         <button
           type="button"
@@ -46,13 +49,7 @@ const Watchlist = (props) => {
             <th>Name</th>
             <th>Armor</th>
             <th>armorperlevel</th>
-            <th>attackdamage</th>
             <th>hp</th>
-            <th>hpperlevel</th>
-            <th>hpregen</th>
-            <th>hpregenperlevel</th>
-            <th>movespeed</th>
-            <th>mp</th>
             <th>WatchList Action</th>
           </tr>
         </thead>
@@ -75,18 +72,12 @@ const Watchlist = (props) => {
               </td>
               <td>{champion.armor}</td>
               <td>{champion.armorperlevel}</td>
-              <td>{champion.attackdamage}</td>
               <td>{champion.hp}</td>
-              <td>{champion.hpperlevel}</td>
-              <td>{champion.hpregen}</td>
-              <td>{champion.hpregenperlevel}</td>
-              <td>{champion.movespeed}</td>
-              <td>{champion.mp}</td>
               <td>
                 <div>
                   <button
                     type="button"
-                    className="btn btn-primary btn-sm"
+                    className="btn btn-primary btn-lg"
                     onClick={() => removeChampion(champion.id)}
                   >
                     Remove
