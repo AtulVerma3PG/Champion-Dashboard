@@ -42,28 +42,10 @@ exports[`First Snapshot test 1`] = `
             armorperlevel
           </th>
           <th>
-            attackdamage
-          </th>
-          <th>
             hp
           </th>
           <th>
-            hpperlevel
-          </th>
-          <th>
-            hpregen
-          </th>
-          <th>
-            hpregenperlevel
-          </th>
-          <th>
-            movespeed
-          </th>
-          <th>
-            mp
-          </th>
-          <th>
-            WatchList Action
+            Watchlist Action
           </th>
         </tr>
       </thead>

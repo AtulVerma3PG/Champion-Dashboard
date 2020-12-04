@@ -25,7 +25,12 @@ const location = {
   },
 };
 
+const state = {
+  watchlist: []
+}
+
 test("First Snapshot test", () => {
+  localStorage.setItem("state", JSON.stringify(state));
   const component = renderer.create(
     <Watchlist location={ location }/>,
   );
@@ -40,8 +45,10 @@ history.push("/");
 describe("Test Button component", () => {
   it("Test click event", () => {
     const historyMock = { push: jest.fn() };
+    localStorage.setItem("state", JSON.stringify(state));
     const shallowCopy = shallow(<Watchlist history={historyMock} location={location} />);
     shallowCopy.find("button").simulate("onClick");
     expect(history.location.pathname).toEqual("/");
+    localStorage.removeItem("state");
   });
 });

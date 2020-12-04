@@ -50,7 +50,7 @@ const Watchlist = (props) => {
             <th>Armor</th>
             <th>armorperlevel</th>
             <th>hp</th>
-            <th>WatchList Action</th>
+            <th>Watchlist Action</th>
           </tr>
         </thead>
         <tbody>

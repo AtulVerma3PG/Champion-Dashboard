@@ -27,7 +27,7 @@ const Champion = (props) => {
   } = props;
   const champLength = allChampions.length;
   const expectedDivisns = champLength / pageSize;
-  const divisions = champLength % pageSize == 0
+  const divisions = champLength % pageSize === 0
     ? expectedDivisns
     : Math.floor(expectedDivisns) + 1;
   const items = [];
@@ -49,36 +49,37 @@ const Champion = (props) => {
       <Navbar bg="dark" variant="dark">
         <Navbar.Brand>My Champions Dashboard</Navbar.Brand>
 
-        <p className="navText">Please select page size</p>
-        <DropdownButton
-          title={pageSize}
-          id="document-type"
-          className="pageSize"
-          onSelect={(e) => setPageSize(e)}
-        >
-          {championNumbers.map((opt) => (
-            <Dropdown.Item as="button" eventKey={opt} key={opt}>
-              {opt}
-            </Dropdown.Item>
-          ))}
-        </DropdownButton>
-        <div>
-          <button
-            type="button"
-            className="btn btn-primary btn-lg"
-            id="openWatchlist"
-            onClick={openWatchlist}
-          >
-            Watchlist ({watchlist.length})
-          </button>
-        </div>
-      </Navbar>
+        <SearchField
+          placeholder="Search item"
+          value={searchedText}
+          onChange={onSearchEnter}
+        />
 
-      <SearchField
-        placeholder="Search item"
-        value={searchedText}
-        onChange={onSearchEnter}
-      />
+        <div className="display-inlineb">
+          <p className="navText">Please select page size</p>
+          <DropdownButton
+            title={pageSize}
+            id="document-type"
+            className="pageSize display-inlineb"
+            onSelect={(e) => setPageSize(e)}
+          >
+            {championNumbers.map((opt) => (
+              <Dropdown.Item as="button" eventKey={opt} key={opt}>
+                {opt}
+              </Dropdown.Item>
+            ))}
+          </DropdownButton>
+        </div>
+        <button
+          type="button"
+          className="btn btn-primary btn-lg"
+          id="openWatchlist"
+          onClick={openWatchlist}
+        >
+          Watchlist ({watchlist.length})
+        </button>
+
+      </Navbar>
 
       <div>
         <ReactBootStrap.Table responsive="md" stripped bordered hover>
@@ -86,36 +87,61 @@ const Champion = (props) => {
             <tr>
               <th>Champion Profile</th>
               <th>
-                Champion ID
-                <br />
-                <FontAwesomeIcon icon={faSortUp} style={sortBy == "Asc" && sortOn == "id" ? { color: "#FF0000" } : { color: "black" }} size="2x" onClick={() => props.sortAsc("id")} />
-                <FontAwesomeIcon icon={faSortDown} style={sortBy == "Desc" && sortOn == "id" ? { color: "#FF0000" } : { color: "black" }} size="2x" onClick={() => props.sortDesc("id")} />
+                <div className="heading">
+                  <div>
+                    Champion ID
+                  </div>
+                  <div className="sortIcon">
+                    <FontAwesomeIcon icon={faSortUp} style={sortBy === "Asc" && sortOn === "id" ? { color: "red" } : { color: "black" }} size="1x" onClick={() => props.sortAsc("id")} />
+                    <FontAwesomeIcon icon={faSortDown} style={sortBy === "Desc" && sortOn === "id" ? { color: "red" } : { color: "black" }} size="1x" onClick={() => props.sortDesc("id")} />
+                  </div>
+                </div>
               </th>
               <th>
-                Name
-                <br />
-                <FontAwesomeIcon icon={faSortUp} style={sortBy == "Asc" && sortOn == "name" ? { color: "#FF0000" } : { color: "black" }} size="2x" onClick={() => props.sortAsc("name")} />
-                <FontAwesomeIcon icon={faSortDown} style={sortBy == "Desc" && sortOn == "name" ? { color: "#FF0000" } : { color: "black" }} size="2x" onClick={() => props.sortDesc("name")} />
+                <div className="heading">
+                  <div>
+                    Name
+                  </div>
+                  <div className="sortIcon">
+                    <FontAwesomeIcon icon={faSortUp} style={sortBy === "Asc" && sortOn === "name" ? { color: "#FF0000" } : { color: "black" }} size="1x" onClick={() => props.sortAsc("name")} />
+                    <FontAwesomeIcon icon={faSortDown} style={sortBy === "Desc" && sortOn === "name" ? { color: "#FF0000" } : { color: "black" }} size="1x" onClick={() => props.sortDesc("name")} />
+                  </div>
+                </div>
               </th>
               <th>
-                Armor
-                <br />
-                <FontAwesomeIcon icon={faSortUp} style={sortBy == "Asc" && sortOn == "armor" ? { color: "#FF0000" } : { color: "black" }} size="2x" onClick={() => props.sortAsc("armor")} />
-                <FontAwesomeIcon icon={faSortDown} style={sortBy == "Desc" && sortOn == "armor" ? { color: "#FF0000" } : { color: "black" }} size="2x" onClick={() => props.sortDesc("armor")} />
+                <div className="heading">
+                  <div>
+                    Armor
+                  </div>
+                  <div className="sortIcon">
+                    <FontAwesomeIcon icon={faSortUp} style={sortBy === "Asc" && sortOn === "armor" ? { color: "#FF0000" } : { color: "black" }} size="1x" onClick={() => props.sortAsc("armor")} />
+                    <FontAwesomeIcon icon={faSortDown} style={sortBy === "Desc" && sortOn === "armor" ? { color: "#FF0000" } : { color: "black" }} size="1x" onClick={() => props.sortDesc("armor")} />
+                  </div>
+                </div>
               </th>
               <th>
-                armorperlevel
-                <br />
-                <FontAwesomeIcon icon={faSortUp} style={sortBy == "Asc" && sortOn == "armorperlevel" ? { color: "#FF0000" } : { color: "black" }} size="2x" onClick={() => props.sortAsc("armorperlevel")} />
-                <FontAwesomeIcon icon={faSortDown} style={sortBy == "Desc" && sortOn == "armorperlevel" ? { color: "#FF0000" } : { color: "black" }} size="2x" onClick={() => props.sortDesc("armorperlevel")} />
+                <div className="heading">
+                  <div>
+                    armorperlevel
+                  </div>
+                  <div className="sortIcon">
+                    <FontAwesomeIcon icon={faSortUp} style={sortBy === "Asc" && sortOn === "armorperlevel" ? { color: "#FF0000" } : { color: "black" }} size="1x" onClick={() => props.sortAsc("armorperlevel")} />
+                    <FontAwesomeIcon icon={faSortDown} style={sortBy === "Desc" && sortOn === "armorperlevel" ? { color: "#FF0000" } : { color: "black" }} size="1x" onClick={() => props.sortDesc("armorperlevel")} />
+                  </div>
+                </div>
               </th>
               <th>
-                hp
-                <br />
-                <FontAwesomeIcon icon={faSortUp} style={sortBy == "Asc" && sortOn == "hp" ? { color: "#FF0000" } : { color: "black" }} size="2x" onClick={() => props.sortAsc("hp")} />
-                <FontAwesomeIcon icon={faSortDown} style={sortBy == "Desc" && sortOn == "hp" ? { color: "#FF0000" } : { color: "black" }} size="2x" onClick={() => props.sortDesc("hp")} />
+                <div className="heading">
+                  <div>
+                    hp
+                  </div>
+                  <div className="sortIcon">
+                    <FontAwesomeIcon icon={faSortUp} style={sortBy === "Asc" && sortOn === "hp" ? { color: "#FF0000" } : { color: "black" }} size="1x" onClick={() => props.sortAsc("hp")} />
+                    <FontAwesomeIcon icon={faSortDown} style={sortBy === "Desc" && sortOn === "hp" ? { color: "#FF0000" } : { color: "black" }} size="1x" onClick={() => props.sortDesc("hp")} />
+                  </div>
+                </div>
               </th>
-              <th>WatchList Action</th>
+              <th>Watchlist Action</th>
             </tr>
           </thead>
           <tbody>
@@ -141,7 +167,7 @@ const Champion = (props) => {
                 <td>
                   <div>
                     {props.watchlist.filter((e) => e.id === champion.id)
-                      .length == "0" && (
+                      .length === 0 && (
                       <button
                         type="button"
                         className="btn btn-primary btn-lg"
@@ -151,7 +177,7 @@ const Champion = (props) => {
                       </button>
                     )}
                     {props.watchlist.filter((e) => e.id === champion.id)
-                      .length == "1" && (
+                      .length === 1 && (
                       <button
                         type="button"
                         className="btn btn-primary btn-lg"
@@ -183,7 +209,7 @@ Champion.propTypes = {
   champions: PropTypes.array.isRequired, // eslint-disable-line
   setPageSize: PropTypes.func.isRequired,
   page: PropTypes.number.isRequired,
-  pageSize: PropTypes.number.isRequired,
+  pageSize: PropTypes.string.isRequired,
   sortBy: PropTypes.string.isRequired,
   sortOn: PropTypes.string.isRequired,
   setPage: PropTypes.func.isRequired,
