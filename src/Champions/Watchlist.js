@@ -1,18 +1,18 @@
 import React from "react";
 import { Navbar } from "react-bootstrap";
+import { useHistory, Link } from "react-router-dom";
 import * as ReactBootStrap from "react-bootstrap";
 import "./Css/Champion.css";
-import { Link } from "react-router-dom";
 
 /**
  * This Function is responsible to show the Watchlist
  *
  * @param {object} props Watchlist details
  */
-const Watchlist = (props) => {
+const Watchlist = () => {
   const state = JSON.parse(localStorage.getItem("state"));
   const { watchlist } = state;
-  const { history } = props;
+  const history = useHistory();
   const openHome = () => {
     history.push("/");
   };
@@ -43,7 +43,7 @@ const Watchlist = (props) => {
       </Navbar>
       <ReactBootStrap.Table responsive="md" bordered hover>
         <thead>
-          <tr>
+          <tr className="center">
             <th>Champion Profile</th>
             <th>Champion ID</th>
             <th>Name</th>
@@ -55,7 +55,7 @@ const Watchlist = (props) => {
         </thead>
         <tbody>
           {watchlist.map((champion) => (
-            <tr key={champion.id}>
+            <tr key={champion.id} className="center">
               <td>
                 <img src={champion.image_url} alt={champion.image_url} />
               </td>
@@ -90,10 +90,6 @@ const Watchlist = (props) => {
       </ReactBootStrap.Table>
     </div>
   );
-};
-
-Watchlist.propTypes = {
-  history: Object.isRequired,
 };
 
 export default Watchlist;

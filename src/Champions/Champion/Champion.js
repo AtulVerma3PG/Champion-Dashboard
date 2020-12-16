@@ -82,9 +82,9 @@ const Champion = (props) => {
       </Navbar>
 
       <div>
-        <ReactBootStrap.Table responsive="md" stripped bordered hover>
+        <ReactBootStrap.Table responsive="md" bordered hover>
           <thead>
-            <tr>
+            <tr className="center">
               <th>Champion Profile</th>
               <th>
                 <div className="heading">
@@ -146,7 +146,7 @@ const Champion = (props) => {
           </thead>
           <tbody>
             {champions.map((champion) => (
-              <tr key={champion.id}>
+              <tr key={champion.id} className="center">
                 <td>
                   <img src={champion.image_url} alt={champion.image_url} />
                 </td>

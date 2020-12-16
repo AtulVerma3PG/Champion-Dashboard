@@ -1,5 +1,6 @@
 /* eslint-disable linebreak-style */
 import React, { Component } from "react";
+import { useHistory } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Champion from "./Champion/Champion";
 
@@ -27,7 +28,7 @@ class Champions extends Component {
       ? JSON.parse(localStorage.getItem("state"))
       : initialState;
     const { articles } = this.state;
-    if (articles.length === 0) {
+    if (articles && articles.length === 0) {
       const defaultAPI = `https://api.pandascore.co/lol/champions?page[number]=&page[size]=&token=${token}`;
       const { pageSize } = this.state;
       fetch(defaultAPI)
@@ -37,7 +38,6 @@ class Champions extends Component {
           visibleArticles: data.slice(0, pageSize),
           articleLength: data.length,
         }));
-      localStorage.clear();
     } else {
       const { page } = this.state;
       this.setPage(page);
@@ -55,9 +55,10 @@ class Champions extends Component {
     this.setState({
       pageSize: event,
       visibleArticles: cropsArticles,
-      page: 1,
+    }, () => {
+      this.setFirstPage();
+      this.updateLocalStorage();
     });
-    this.updateLocalStorage();
   };
 
   /**
@@ -70,8 +71,7 @@ class Champions extends Component {
       page: event,
     });
     let { articles } = this.state;
-    const { pageSize } = this.state;
-    const { articleLength } = this.state;
+    const { pageSize, articleLength } = this.state;
     const pageSkip = (event - 1) * pageSize;
     const pageEndExpected = +pageSkip + +pageSize;
     const pageEnd = pageEndExpected > articleLength
@@ -108,8 +108,7 @@ class Champions extends Component {
     const { watchlist } = this.state;
     this.setState({
       watchlist: watchlist.filter((e) => e.id !== event),
-    });
-    this.updateLocalStorage();
+    }, () => this.updateLocalStorage());
   };
 
   /**
@@ -119,7 +118,6 @@ class Champions extends Component {
     const { history } = this.props;
     history.push({
       pathname: "/ChampionWatchlist",
-      state: { ...this.state },
     });
   };
 
@@ -245,7 +243,7 @@ class Champions extends Component {
    * @param {object} champion
    */
   openChampionDetails = (champion) => {
-    const { history } = this.props;
+    const history = useHistory();
     this.setState({
       champion,
     }, () => {

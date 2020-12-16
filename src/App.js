@@ -2,7 +2,7 @@ import React, { Component } from "react"; /*eslint-disable */
 import { BrowserRouter, Switch, Route, NavLink } from "react-router-dom";
 import Champions from "./Champions/Champions";
 import Watchlist from "./Champions/Watchlist";
-import "./Css/App.css";
+// import "./Css/App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ChampionDetail from "./Champions/Champion/ChampionDetail";
 
@@ -25,7 +25,6 @@ class App extends Component {
             </div>
           </div>
         </BrowserRouter>
-        {/* <Champions /> */}
       </div>
     );
   }

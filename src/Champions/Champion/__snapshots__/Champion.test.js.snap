@@ -127,7 +127,6 @@ exports[`Champion Snapshot test 1`] = `
     >
       <table
         className="table table-bordered table-hover"
-        stripped={true}
       >
         <thead>
           <tr>
