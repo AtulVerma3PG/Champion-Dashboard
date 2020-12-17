@@ -1,5 +1,4 @@
 import React from "react";
-import { Navbar } from "react-bootstrap";
 import * as ReactBootStrap from "react-bootstrap";
 
 const ChampionDetail = (props) => {
@@ -13,8 +12,8 @@ const ChampionDetail = (props) => {
 
   return (
     <div className="container">
-      <Navbar bg="dark" variant="dark">
-        <Navbar.Brand>My Watchlist</Navbar.Brand>
+      <ReactBootStrap.Navbar bg="dark" variant="dark">
+        <ReactBootStrap.Navbar.Brand>My Watchlist</ReactBootStrap.Navbar.Brand>
         <button
           type="button"
           className="btn btn-primary btn-lg"
@@ -22,12 +21,14 @@ const ChampionDetail = (props) => {
         >
           Home
         </button>
-      </Navbar>
+      </ReactBootStrap.Navbar>
       <ReactBootStrap.Table responsive="lg" striped bordered hover>
         <thead>
-          <th colSpan="2">
-            <img src={champion.big_image_url} alt={champion.big_image_url} />
-          </th>
+          <tr>
+            <th colSpan="2">
+              <img src={champion.big_image_url} alt={champion.big_image_url} />
+            </th>
+          </tr>
         </thead>
         <tbody>
           <tr>

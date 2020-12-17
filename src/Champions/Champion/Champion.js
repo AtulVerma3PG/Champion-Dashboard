@@ -1,6 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from "react";
 import PropTypes from "prop-types";
 import { Navbar, DropdownButton, Dropdown } from "react-bootstrap";

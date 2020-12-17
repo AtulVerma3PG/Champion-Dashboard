@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 import React, { Component } from "react";
 import { useHistory } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -37,7 +36,7 @@ class Champions extends Component {
           articles: data,
           visibleArticles: data.slice(0, pageSize),
           articleLength: data.length,
-        }));
+        }, () => { this.updateLocalStorage(); }));
     } else {
       const { page } = this.state;
       this.setPage(page);
