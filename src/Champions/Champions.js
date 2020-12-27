@@ -14,7 +14,7 @@ const initialState = {
   searchedText: "",
   champion: [],
   sortBy: "",
-  sortOn: "name",
+  sortOn: "",
 };
 const token = "h1uX-wC3YOCMRJRUGQIXQ2y2vGwEnYlrKYPdrStNUnI01Ew63a4";
 /**
@@ -80,33 +80,6 @@ class Champions extends Component {
     this.setState({
       page: event,
       visibleArticles: articles,
-    }, () => this.updateLocalStorage());
-  };
-
-  /**
-   *Add Champion to Watchlist
-   *
-   * @param {Array} event Champion to add
-   */
-  addToWatchList = (event) => {
-    const { watchlist } = this.state;
-    watchlist.push(event);
-    this.setState({
-      watchlist,
-      searchedText: "",
-    });
-    this.updateLocalStorage();
-  };
-
-  /**
-   *Remove Champion from Watchlist
-   *
-   * @param {Array} event Champion to remove from Watchlist
-   */
-  removeFromWatchlist = (event) => {
-    const { watchlist } = this.state;
-    this.setState({
-      watchlist: watchlist.filter((e) => e.id !== event),
     }, () => this.updateLocalStorage());
   };
 

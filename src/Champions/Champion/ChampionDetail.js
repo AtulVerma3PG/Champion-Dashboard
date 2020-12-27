@@ -1,27 +1,24 @@
 import React from "react";
 import * as ReactBootStrap from "react-bootstrap";
+import withLayout from "../../hoc/withLayout";
 
 const ChampionDetail = (props) => {
   const { location } = props;
   const { history } = props;
   const { champion } = location.state;
   const openHome = () => {
-    // debugger;
     history.push("/");
   };
 
   return (
     <div className="container">
-      <ReactBootStrap.Navbar bg="dark" variant="dark">
-        <ReactBootStrap.Navbar.Brand>My Watchlist</ReactBootStrap.Navbar.Brand>
-        <button
-          type="button"
-          className="btn btn-primary btn-lg"
-          onClick={openHome}
-        >
-          Home
-        </button>
-      </ReactBootStrap.Navbar>
+      <button
+        type="button"
+        className="styledButton"
+        onClick={openHome}
+      >
+        Home
+      </button>
       <ReactBootStrap.Table responsive="lg" striped bordered hover>
         <thead>
           <tr>
@@ -227,4 +224,4 @@ ChampionDetail.propTypes = {
   history: Object.isRequired,
 };
 
-export default ChampionDetail;
+export default withLayout(ChampionDetail);

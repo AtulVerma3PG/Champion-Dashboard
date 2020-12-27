@@ -14,10 +14,6 @@ p {
   margin-left: 1rem;
   margin-right: 1rem;
 }
-.pageSize {
-  margin-left: 1rem;
-  margin-right: 1rem;
-}
 
 Navbar {
   width: 100%;
@@ -30,6 +26,8 @@ Navbar {
 th {
   font-size: 18px;
   text-align: center;
+  background-color: rgb(48, 35, 39);
+  color: #fff;
 }
 
 .heading {
@@ -51,12 +49,44 @@ th {
 .display-inlineb {
   display: inline-block;
   position: relative;
+  font-size: large;
 }
 
 .react-search-field {
-  min-width: 35%;
+  min-width: 70%;
 }
 
-.center {
-  text-align: center;
+
+img {
+  border-radius: 30%;
+}
+
+.container{
+    border-radius: 15px;
+    padding: 18px;
+    text-align: center;
+    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+    box-shadow: 3px 3px rgba(0, 0, 255, .2), -1em 0 .4em olive;
+    padding: 10px 5px;
+    margin: 10px 0;
+    border: 1px solid #ced4da;
+    justify-content: space-between;
+    text-align: justify;
+}
+
+.left{
+text-align: left;
+}
+
+.right{
+  text-align: right;
+}
+
+#document-type{
+  background-color: coral;
+  font-size: 15px;
+}
+
+#document-type:hover{
+  background-color: rgb(49, 16, 236);
 }

@@ -5,7 +5,9 @@
     "es6": true,
     "node": true
   },
-  "extends": ["airbnb"],
+  "extends": [
+    "airbnb"
+  ],
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
@@ -17,14 +19,32 @@
     "ecmaVersion": 8,
     "sourceType": "module"
   },
-  "plugins": ["react"],
-  "ignorePatterns": ["serviceWorker.js","**/scripts/*.js","**/prettify/*.js"],
+  "plugins": [
+    "react"
+  ],
+  "ignorePatterns": [
+    "serviceWorker.js",
+    "**/scripts/*.js",
+    "**/prettify/*.js"
+  ],
   "rules": {
     "eqeqeq": "off",
     "curly": "error",
-    "quotes": ["error", "double"],
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "quotes": [
+      "error",
+      "double"
+    ],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
+      }
+    ],
     "import/no-named-as-default": 0,
-    "react/jsx-one-expression-per-line": "off"
+    "react/jsx-one-expression-per-line": "off",
+    "react/jsx-props-no-spreading": "off"
   }
 }
