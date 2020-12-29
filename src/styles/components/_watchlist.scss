@@ -1,31 +1,13 @@
 
 .center {
     text-align: center;
+    vertical-align: middle;
   }
   img {
     border-radius: 30%;
   }
 
-  .styledButton {
-    background-color: #000000;
-    margin-left: 15px;
-    padding: 7px 0px;
-    border: 1px solid #fff;
-    font-size: 14px;
-    transition: all 0.25s ease-in-out;
-    text-transform: none;
-    border-radius: 3px;
-    font-family: "Jim Sans Regular",Arial;
-    width: 169px;
-    height: 36px;
-    align-items: center;
-    text-align: center;
-    color: #fff;
-    background-position: left top;
-    text-decoration: none;
-  }
-
-  .styledButton:hover {
-    color: #000;
-    background-color: rgb(235, 132, 132);
+  .watchlistHead{
+    vertical-align: middle;
+    padding-top: 5px;
   }

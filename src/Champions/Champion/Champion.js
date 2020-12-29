@@ -21,7 +21,7 @@ const championNumbers = [10, 20, 50];
  * @param {object} props The details of the champions grid as props
  */
 const Champion = (props) => {
-  const watchlist = JSON.parse(localStorage.getItem("watchlist"));
+  const watchlist = JSON.parse(localStorage.getItem("watchlist")) !== null ? JSON.parse(localStorage.getItem("watchlist")) : [];
   const [modWatchlist, setWatchlist] = useState(watchlist);
   const updateWatchlist = (watchlst) => {
     localStorage.setItem("watchlist", JSON.stringify(watchlst));
@@ -74,7 +74,6 @@ const Champion = (props) => {
       </Pagination.Item>,
     );
   }
-
   return (
     <div>
       <div className="container">
@@ -89,7 +88,6 @@ const Champion = (props) => {
           </div>
           <div className="col right">
             <div className="display-inlineb">
-              {/* <p className="navText">Please select page size</p> */}
               <DropdownButton
                 title={`PageSize ( ${pageSize} )`}
                 id="document-type"
@@ -119,62 +117,65 @@ const Champion = (props) => {
       <div className="container">
         <ReactBootStrap.Table responsive="md" bordered hover>
           <thead>
-            <tr className="center">
+            <tr>
               <th>Champion Profile</th>
               <th>
-                <div className="heading">
+                <div className="heading" onClick={() => props.sort("id")}>
                   <div>
                     Champion ID
                   </div>
                   <div className="sortIcon">
-                    <i className="fa fa-sort-asc" style={sortBy === "Asc" && sortOn === "id" ? { color: "red" } : { color: "lightgray" }} onClick={() => props.sortAsc("id")} />
-                    <i className="fa fa-sort-desc" style={sortBy === "Desc" && sortOn === "id" ? { color: "red" } : { color: "lightgray" }} onClick={() => props.sortDesc("id")} />
-                    {/* <FontAwesomeIcon icon={faSortUp} style={sortBy === "Asc" && sortOn === "id" ? { color: "red" } : { color: "lightgray" }} size="1x" onClick={() => props.sortAsc("id")} />
-                    <FontAwesomeIcon icon={faSortDown} style={sortBy === "Desc" && sortOn === "id" ? { color: "red" } : { color: "lightgray" }} size="1x" onClick={() => props.sortDesc("id")} /> */}
+                    <FontAwesomeIcon icon={faSort} style={sortOn === "id" ? { display: "none" } : { display: "block" }} size="1x" />
+                    <FontAwesomeIcon icon={faSortUp} style={sortBy === "Asc" && sortOn === "id" ? { color: "red" } : { display: "none" }} size="1x" />
+                    <FontAwesomeIcon icon={faSortDown} style={sortBy === "Desc" && sortOn === "id" ? { color: "red" } : { display: "none" }} size="1x" />
                   </div>
                 </div>
               </th>
               <th>
-                <div className="heading">
+                <div className="heading" onClick={() => props.sort("name")}>
                   <div>
                     Name
                   </div>
                   <div className="sortIcon">
-                    <FontAwesomeIcon icon={faSortUp} style={sortBy === "Asc" && sortOn === "name" ? { color: "#FF0000" } : { color: "lightgray" }} size="1x" onClick={() => props.sortAsc("name")} />
-                    <FontAwesomeIcon icon={faSortDown} style={sortBy === "Desc" && sortOn === "name" ? { color: "#FF0000" } : { color: "lightgray" }} size="1x" onClick={() => props.sortDesc("name")} />
+                    <FontAwesomeIcon icon={faSort} style={sortOn === "name" ? { display: "none" } : { display: "block" }} size="1x" />
+                    <FontAwesomeIcon icon={faSortUp} style={sortBy === "Asc" && sortOn === "name" ? { color: "red" } : { display: "none" }} size="1x" />
+                    <FontAwesomeIcon icon={faSortDown} style={sortBy === "Desc" && sortOn === "name" ? { color: "red" } : { display: "none" }} size="1x" />
                   </div>
                 </div>
               </th>
               <th>
-                <div className="heading">
+                <div className="heading" onClick={() => props.sort("armor")}>
                   <div>
                     Armor
                   </div>
                   <div className="sortIcon">
-                    <FontAwesomeIcon icon={faSortUp} style={sortBy === "Asc" && sortOn === "armor" ? { color: "#FF0000" } : { color: "lightgray" }} size="1x" onClick={() => props.sortAsc("armor")} />
-                    <FontAwesomeIcon icon={faSortDown} style={sortBy === "Desc" && sortOn === "armor" ? { color: "#FF0000" } : { color: "lightgray" }} size="1x" onClick={() => props.sortDesc("armor")} />
+                    <FontAwesomeIcon icon={faSort} style={sortOn === "armor" ? { display: "none" } : { display: "block" }} size="1x" />
+                    <FontAwesomeIcon icon={faSortUp} style={sortBy === "Asc" && sortOn === "armor" ? { color: "red" } : { display: "none" }} size="1x" />
+                    <FontAwesomeIcon icon={faSortDown} style={sortBy === "Desc" && sortOn === "armor" ? { color: "red" } : { display: "none" }} size="1x" />
                   </div>
                 </div>
               </th>
               <th>
-                <div className="heading">
+                <div className="heading" onClick={() => props.sort("armorperlevel")}>
                   <div>
                     armorperlevel
                   </div>
                   <div className="sortIcon">
-                    <FontAwesomeIcon icon={faSortUp} style={sortBy === "Asc" && sortOn === "armorperlevel" ? { color: "#FF0000" } : { color: "lightgray" }} size="1x" onClick={() => props.sortAsc("armorperlevel")} />
-                    <FontAwesomeIcon icon={faSortDown} style={sortBy === "Desc" && sortOn === "armorperlevel" ? { color: "#FF0000" } : { color: "lightgray" }} size="1x" onClick={() => props.sortDesc("armorperlevel")} />
+                    <FontAwesomeIcon icon={faSort} style={sortOn === "armorperlevel" ? { display: "none" } : { display: "block" }} size="1x" />
+                    <FontAwesomeIcon icon={faSortUp} style={sortBy === "Asc" && sortOn === "armorperlevel" ? { color: "red" } : { display: "none" }} size="1x" />
+                    <FontAwesomeIcon icon={faSortDown} style={sortBy === "Desc" && sortOn === "armorperlevel" ? { color: "red" } : { display: "none" }} size="1x" />
                   </div>
                 </div>
               </th>
               <th>
-                <div className="heading">
+                <div className="heading" onClick={() => props.sort("hp")}>
                   <div>
                     hp
                   </div>
                   <div className="sortIcon">
-                    <FontAwesomeIcon icon={faSortUp} style={sortBy === "Asc" && sortOn === "hp" ? { color: "#FF0000" } : { color: "lightgray" }} size="1x" onClick={() => props.sortAsc("hp")} />
-                    <FontAwesomeIcon icon={faSortDown} style={sortBy === "Desc" && sortOn === "hp" ? { color: "#FF0000" } : { color: "lightgray" }} size="1x" onClick={() => props.sortDesc("hp")} />
+                    <FontAwesomeIcon icon={faSort} style={sortOn === "hp" ? { display: "none" } : { display: "block" }} size="1x" />
+                    <FontAwesomeIcon icon={faSortUp} style={sortBy === "Asc" && sortOn === "hp" ? { color: "red" } : { display: "none" }} size="1x" />
+                    <FontAwesomeIcon icon={faSortDown} style={sortBy === "Desc" && sortOn === "hp" ? { color: "red" } : { display: "none" }} size="1x" />
                   </div>
                 </div>
               </th>
@@ -185,7 +186,7 @@ const Champion = (props) => {
             {champions.map((champion) => (
               <tr key={champion.id} className="center">
                 <td>
-                  <img src={champion.image_url} alt={champion.image_url} />
+                  <img src={champion.image_url} className="tableImage" alt={champion.image_url} />
                 </td>
                 <td>{champion.id}</td>
                 <td>
@@ -250,12 +251,11 @@ Champion.propTypes = {
   sortBy: PropTypes.string.isRequired,
   sortOn: PropTypes.string.isRequired,
   setPage: PropTypes.func.isRequired,
+  sort: PropTypes.func.isRequired,
   watchlist: PropTypes.array.isRequired, // eslint-disable-line
   openWatchlist: PropTypes.func.isRequired,
   firstPage: PropTypes.func.isRequired,
   lastPage: PropTypes.func.isRequired,
-  sortAsc: PropTypes.func.isRequired,
-  sortDesc: PropTypes.func.isRequired,
   onSearchEnter: PropTypes.func.isRequired,
   searchedText: PropTypes.string.isRequired,
 };

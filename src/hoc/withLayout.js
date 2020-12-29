@@ -2,12 +2,12 @@ import React from "react";
 import { Navbar } from "react-bootstrap";
 import logo from "../assets/championLogo.png";
 
-const withLayout = (WrappedComponent, name) => {
+const withLayout = (WrappedComponent) => {
   const WithLayout = (props) => (
     <div>
       <Navbar bg="dark" variant="dark">
         <img src={logo} alt="logo" className="logo" />
-        <Navbar.Brand>My Champions Dashboard {name}</Navbar.Brand>
+        <Navbar.Brand>My Champions Dashboard</Navbar.Brand>
 
       </Navbar>
       <WrappedComponent {...props} />

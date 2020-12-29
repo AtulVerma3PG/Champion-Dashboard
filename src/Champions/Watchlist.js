@@ -16,6 +16,7 @@ const Watchlist = () => {
     history.push("/");
   };
   useEffect(() => {
+    setWatchlist(modWatchlist === undefined ? [] : modWatchlist);
     localStorage.setItem("watchlist", JSON.stringify(modWatchlist));
   });
   /**
@@ -30,7 +31,7 @@ const Watchlist = () => {
     <div>
       <div className="container">
         <div className="row">
-          <div className="col left"> <h2>My Watchlist</h2></div>
+          <div className="col left"> <h2 className="watchlistHead">My Watchlist</h2></div>
           <div className="col right">
             <button
               type="button"
@@ -59,9 +60,9 @@ const Watchlist = () => {
             {modWatchlist.map((champion) => (
               <tr key={champion.id} className="center">
                 <td>
-                  <img src={champion.image_url} alt={champion.image_url} />
+                  <img src={champion.image_url} className="tableImage" alt={champion.image_url} />
                 </td>
-                <td>{champion.id}</td>
+                <td className="alignMiddle">{champion.id}</td>
                 <td>
                   <Link
                     to={{
@@ -95,4 +96,4 @@ const Watchlist = () => {
   );
 };
 
-export default withLayout(Watchlist, "- Watchlist");
+export default withLayout(Watchlist);

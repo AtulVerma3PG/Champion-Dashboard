@@ -17,7 +17,7 @@ const ChampionDetail = (props) => {
         className="styledButton"
         onClick={openHome}
       >
-        Home
+        Back to Home
       </button>
       <ReactBootStrap.Table responsive="lg" striped bordered hover>
         <thead>

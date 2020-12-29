@@ -152,35 +152,21 @@ class Champions extends Component {
   };
 
   /**
-   *Sort by Ascending
+   *Sort the Articles
    *
-   * @param {string} key element to be sorted Ascending
+   * @param {string} key element to be sorted
    */
-  sortByAsc = (key) => {
+  sortList = (key) => {
     const { articles } = this.state;
-    articles.sort(this.compareByAsc(key));
-    this.setState({ articles, sortBy: "Asc", sortOn: key });
-    this.setPage(1);
-    this.updateLocalStorage();
-  };
-
-  /**
-   *Sort by Descending
-   *
-   * @param {string} key element to be sorted Descending
-   */
-  sortByDesc = (key) => {
-    const { articles } = this.state;
-    articles.sort(this.compareByDesc(key));
-    this.setState({ articles, sortBy: "Desc", sortOn: key });
-    this.setPage(1);
-    this.updateLocalStorage();
-  };
-
-  sort = (key) => {
-    const { visibleArticles } = this.state;
-    visibleArticles.sort(this.compareByDesc(key));
-    this.setState({ visibleArticles });
+    let { sortBy } = this.state;
+    if (sortBy === "Asc") {
+      sortBy = "Desc";
+      articles.sort(this.compareByDesc(key));
+    } else {
+      sortBy = "Asc";
+      articles.sort(this.compareByAsc(key));
+    }
+    this.setState({ articles, sortBy, sortOn: key });
     this.setPage(1);
     this.updateLocalStorage();
   };
@@ -259,6 +245,7 @@ class Champions extends Component {
             searchedText={searchedText}
             sortBy={sortBy}
             sortOn={sortOn}
+            sort={this.sortList}
             openChampionDetails={this.openChampionDetails}
           />
         ) : (
