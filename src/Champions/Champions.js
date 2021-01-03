@@ -6,6 +6,7 @@ import Champion from "./Champion/Champion";
 const initialState = {
   articles: [],
   searches: [],
+  loading: false,
   watchlist: [],
   page: 1,
   pageSize: 10,
@@ -26,6 +27,9 @@ class Champions extends Component {
     this.state = JSON.parse(localStorage.getItem("state"))
       ? JSON.parse(localStorage.getItem("state"))
       : initialState;
+  }
+
+  componentDidMount() {
     const { articles } = this.state;
     if (articles && articles.length === 0) {
       const defaultAPI = `https://api.pandascore.co/lol/champions?page[number]=&page[size]=&token=${token}`;
@@ -66,9 +70,6 @@ class Champions extends Component {
    * @param {object} event Page Number
    */
   setPage = (event) => {
-    this.setState({
-      page: event,
-    });
     let { articles } = this.state;
     const { pageSize, articleLength } = this.state;
     const pageSkip = (event - 1) * pageSize;
@@ -80,6 +81,8 @@ class Champions extends Component {
     this.setState({
       page: event,
       visibleArticles: articles,
+      searchedText: "",
+      loading: false,
     }, () => this.updateLocalStorage());
   };
 
@@ -179,6 +182,7 @@ class Champions extends Component {
   searchEnter = (event) => {
     const { page } = this.state;
     if (event !== "") {
+      this.setState({ loading: true });
       const defaultAPI = `https://api.pandascore.co/lol/champions?search[name]=${event}&token=h1uX-wC3YOCMRJRUGQIXQ2y2vGwEnYlrKYPdrStNUnI01Ew63a4`;
       fetch(defaultAPI)
         .then((response) => response.json())
@@ -186,11 +190,13 @@ class Champions extends Component {
           searches: data,
           visibleArticles: data,
           searchedText: event,
+          loading: false,
         }));
     } else {
       this.setState({
         searchedText: "",
         searches: [],
+        loading: false,
       }, () => this.setPage(page));
     }
     this.updateLocalStorage();
@@ -221,7 +227,7 @@ class Champions extends Component {
 
   render() {
     const {
-      articles, visibleArticles, page, pageSize, watchlist, searchedText, sortBy, sortOn,
+      articles, visibleArticles, page, pageSize, watchlist, searchedText, sortBy, sortOn, loading,
     } = this.state;
     return (
       <div>
@@ -246,6 +252,7 @@ class Champions extends Component {
             sortBy={sortBy}
             sortOn={sortOn}
             sort={this.sortList}
+            loading={loading}
             openChampionDetails={this.openChampionDetails}
           />
         ) : (

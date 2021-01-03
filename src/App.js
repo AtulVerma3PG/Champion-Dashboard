@@ -3,7 +3,6 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import Champions from "./Champions/Champions";
 import Watchlist from "./Champions/Watchlist";
-// import "./Css/App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ChampionDetail from "./Champions/Champion/ChampionDetail";
 

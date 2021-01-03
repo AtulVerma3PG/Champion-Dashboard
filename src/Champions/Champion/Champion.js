@@ -33,7 +33,7 @@ const Champion = (props) => {
 
   const {
     allChampions, pageSize, onSearchEnter, openWatchlist,
-    searchedText, champions, firstPage, lastPage, setPageSize, sortBy, sortOn,
+    searchedText, champions, firstPage, lastPage, setPageSize, sortBy, sortOn, loading,
   } = props;
 
   /**
@@ -88,6 +88,7 @@ const Champion = (props) => {
           </div>
           <div className="col right">
             <div className="display-inlineb">
+              {searchedText === "" && (
               <DropdownButton
                 title={`PageSize ( ${pageSize} )`}
                 id="document-type"
@@ -100,6 +101,7 @@ const Champion = (props) => {
                   </Dropdown.Item>
                 ))}
               </DropdownButton>
+              )}
             </div>
             <button
               type="button"
@@ -109,127 +111,128 @@ const Champion = (props) => {
             >
               Watchlist ({modWatchlist.length})
             </button>
-
           </div>
         </div>
 
       </div>
       <div className="container">
-        <ReactBootStrap.Table responsive="md" bordered hover>
-          <thead>
-            <tr>
-              <th>Champion Profile</th>
-              <th>
-                <div className="heading" onClick={() => props.sort("id")}>
-                  <div>
-                    Champion ID
+        { !loading ? (
+          <ReactBootStrap.Table responsive="md" bordered hover>
+            <thead>
+              <tr>
+                <th>Champion Profile</th>
+                <th>
+                  <div className="heading" onClick={() => props.sort("id")}>
+                    <div>
+                      Champion ID
+                    </div>
+                    <div className="sortIcon">
+                      <FontAwesomeIcon icon={faSort} style={sortOn === "id" ? { display: "none" } : { display: "block" }} size="1x" />
+                      <FontAwesomeIcon icon={faSortUp} style={sortBy === "Asc" && sortOn === "id" ? { color: "red" } : { display: "none" }} size="1x" />
+                      <FontAwesomeIcon icon={faSortDown} style={sortBy === "Desc" && sortOn === "id" ? { color: "red" } : { display: "none" }} size="1x" />
+                    </div>
                   </div>
-                  <div className="sortIcon">
-                    <FontAwesomeIcon icon={faSort} style={sortOn === "id" ? { display: "none" } : { display: "block" }} size="1x" />
-                    <FontAwesomeIcon icon={faSortUp} style={sortBy === "Asc" && sortOn === "id" ? { color: "red" } : { display: "none" }} size="1x" />
-                    <FontAwesomeIcon icon={faSortDown} style={sortBy === "Desc" && sortOn === "id" ? { color: "red" } : { display: "none" }} size="1x" />
+                </th>
+                <th>
+                  <div className="heading" onClick={() => props.sort("name")}>
+                    <div>
+                      Name
+                    </div>
+                    <div className="sortIcon">
+                      <FontAwesomeIcon icon={faSort} style={sortOn === "name" ? { display: "none" } : { display: "block" }} size="1x" />
+                      <FontAwesomeIcon icon={faSortUp} style={sortBy === "Asc" && sortOn === "name" ? { color: "red" } : { display: "none" }} size="1x" />
+                      <FontAwesomeIcon icon={faSortDown} style={sortBy === "Desc" && sortOn === "name" ? { color: "red" } : { display: "none" }} size="1x" />
+                    </div>
                   </div>
-                </div>
-              </th>
-              <th>
-                <div className="heading" onClick={() => props.sort("name")}>
-                  <div>
-                    Name
+                </th>
+                <th>
+                  <div className="heading" onClick={() => props.sort("armor")}>
+                    <div>
+                      Armor
+                    </div>
+                    <div className="sortIcon">
+                      <FontAwesomeIcon icon={faSort} style={sortOn === "armor" ? { display: "none" } : { display: "block" }} size="1x" />
+                      <FontAwesomeIcon icon={faSortUp} style={sortBy === "Asc" && sortOn === "armor" ? { color: "red" } : { display: "none" }} size="1x" />
+                      <FontAwesomeIcon icon={faSortDown} style={sortBy === "Desc" && sortOn === "armor" ? { color: "red" } : { display: "none" }} size="1x" />
+                    </div>
                   </div>
-                  <div className="sortIcon">
-                    <FontAwesomeIcon icon={faSort} style={sortOn === "name" ? { display: "none" } : { display: "block" }} size="1x" />
-                    <FontAwesomeIcon icon={faSortUp} style={sortBy === "Asc" && sortOn === "name" ? { color: "red" } : { display: "none" }} size="1x" />
-                    <FontAwesomeIcon icon={faSortDown} style={sortBy === "Desc" && sortOn === "name" ? { color: "red" } : { display: "none" }} size="1x" />
+                </th>
+                <th>
+                  <div className="heading" onClick={() => props.sort("armorperlevel")}>
+                    <div>
+                      Armor per Level
+                    </div>
+                    <div className="sortIcon">
+                      <FontAwesomeIcon icon={faSort} style={sortOn === "armorperlevel" ? { display: "none" } : { display: "block" }} size="1x" />
+                      <FontAwesomeIcon icon={faSortUp} style={sortBy === "Asc" && sortOn === "armorperlevel" ? { color: "red" } : { display: "none" }} size="1x" />
+                      <FontAwesomeIcon icon={faSortDown} style={sortBy === "Desc" && sortOn === "armorperlevel" ? { color: "red" } : { display: "none" }} size="1x" />
+                    </div>
                   </div>
-                </div>
-              </th>
-              <th>
-                <div className="heading" onClick={() => props.sort("armor")}>
-                  <div>
-                    Armor
+                </th>
+                <th>
+                  <div className="heading" onClick={() => props.sort("hp")}>
+                    <div>
+                      HP
+                    </div>
+                    <div className="sortIcon">
+                      <FontAwesomeIcon icon={faSort} style={sortOn === "hp" ? { display: "none" } : { display: "block" }} size="1x" />
+                      <FontAwesomeIcon icon={faSortUp} style={sortBy === "Asc" && sortOn === "hp" ? { color: "red" } : { display: "none" }} size="1x" />
+                      <FontAwesomeIcon icon={faSortDown} style={sortBy === "Desc" && sortOn === "hp" ? { color: "red" } : { display: "none" }} size="1x" />
+                    </div>
                   </div>
-                  <div className="sortIcon">
-                    <FontAwesomeIcon icon={faSort} style={sortOn === "armor" ? { display: "none" } : { display: "block" }} size="1x" />
-                    <FontAwesomeIcon icon={faSortUp} style={sortBy === "Asc" && sortOn === "armor" ? { color: "red" } : { display: "none" }} size="1x" />
-                    <FontAwesomeIcon icon={faSortDown} style={sortBy === "Desc" && sortOn === "armor" ? { color: "red" } : { display: "none" }} size="1x" />
-                  </div>
-                </div>
-              </th>
-              <th>
-                <div className="heading" onClick={() => props.sort("armorperlevel")}>
-                  <div>
-                    armorperlevel
-                  </div>
-                  <div className="sortIcon">
-                    <FontAwesomeIcon icon={faSort} style={sortOn === "armorperlevel" ? { display: "none" } : { display: "block" }} size="1x" />
-                    <FontAwesomeIcon icon={faSortUp} style={sortBy === "Asc" && sortOn === "armorperlevel" ? { color: "red" } : { display: "none" }} size="1x" />
-                    <FontAwesomeIcon icon={faSortDown} style={sortBy === "Desc" && sortOn === "armorperlevel" ? { color: "red" } : { display: "none" }} size="1x" />
-                  </div>
-                </div>
-              </th>
-              <th>
-                <div className="heading" onClick={() => props.sort("hp")}>
-                  <div>
-                    hp
-                  </div>
-                  <div className="sortIcon">
-                    <FontAwesomeIcon icon={faSort} style={sortOn === "hp" ? { display: "none" } : { display: "block" }} size="1x" />
-                    <FontAwesomeIcon icon={faSortUp} style={sortBy === "Asc" && sortOn === "hp" ? { color: "red" } : { display: "none" }} size="1x" />
-                    <FontAwesomeIcon icon={faSortDown} style={sortBy === "Desc" && sortOn === "hp" ? { color: "red" } : { display: "none" }} size="1x" />
-                  </div>
-                </div>
-              </th>
-              <th>Watchlist Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {champions.map((champion) => (
-              <tr key={champion.id} className="center">
-                <td>
-                  <img src={champion.image_url} className="tableImage" alt={champion.image_url} />
-                </td>
-                <td>{champion.id}</td>
-                <td>
-                  <Link
-                    to={{
-                      pathname: "/ChampionDetails",
-                      state: { champion },
-                    }}
-                  >
-                    {champion.name}
-                  </Link>
-                </td>
-                <td>{champion.armor}</td>
-                <td>{champion.armorperlevel}</td>
-                <td>{champion.hp}</td>
-                <td>
-                  <div>
-                    {modWatchlist.filter((e) => e.id === champion.id)
-                      .length === 0 && (
-                      <button
-                        type="button"
-                        className="btn btn-primary btn-lg"
-                        onClick={() => addChampion(champion)}
-                      >
-                        Add
-                      </button>
-                    )}
-                    {modWatchlist.filter((e) => e.id === champion.id)
-                      .length === 1 && (
-                      <button
-                        type="button"
-                        className="btn btn-primary btn-lg"
-                        onClick={() => removeChampion(champion.id)}
-                      >
-                        Remove
-                      </button>
-                    )}
-                  </div>
-                </td>
+                </th>
+                <th>Watchlist Action</th>
               </tr>
-            ))}
-          </tbody>
-        </ReactBootStrap.Table>
+            </thead>
+            <tbody>
+              {champions.map((champion) => (
+                <tr key={champion.id} className="center">
+                  <td>
+                    <img src={champion.image_url} className="tableImage" alt={champion.image_url} />
+                  </td>
+                  <td>{champion.id}</td>
+                  <td>
+                    <Link
+                      to={{
+                        pathname: "/ChampionDetails",
+                        state: { champion },
+                      }}
+                    >
+                      {champion.name}
+                    </Link>
+                  </td>
+                  <td>{champion.armor}</td>
+                  <td>{champion.armorperlevel}</td>
+                  <td>{champion.hp}</td>
+                  <td>
+                    <div>
+                      {modWatchlist.filter((e) => e.id === champion.id)
+                        .length === 0 && (
+                        <button
+                          type="button"
+                          className="btn btn-primary btn-lg"
+                          onClick={() => addChampion(champion)}
+                        >
+                          Add
+                        </button>
+                      )}
+                      {modWatchlist.filter((e) => e.id === champion.id)
+                        .length === 1 && (
+                        <button
+                          type="button"
+                          className="btn btn-primary btn-lg"
+                          onClick={() => removeChampion(champion.id)}
+                        >
+                          Remove
+                        </button>
+                      )}
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </ReactBootStrap.Table>
+        ) : <div className="fa fa-refresh"> Loading....</div>}
         {searchedText === "" && (
         <Pagination>
           <Pagination.First onClick={firstPage} />
@@ -247,6 +250,7 @@ Champion.propTypes = {
   champions: PropTypes.array.isRequired, // eslint-disable-line
   setPageSize: PropTypes.func.isRequired,
   page: PropTypes.number.isRequired,
+  loading: PropTypes.bool.isRequired,
   pageSize: PropTypes.string.isRequired,
   sortBy: PropTypes.string.isRequired,
   sortOn: PropTypes.string.isRequired,

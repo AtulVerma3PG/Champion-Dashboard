@@ -9,14 +9,13 @@ import withLayout from "../hoc/withLayout";
  * @param {object} props Watchlist details
  */
 const Watchlist = () => {
-  const watchlist = JSON.parse(localStorage.getItem("watchlist"));
+  const watchlist = JSON.parse(localStorage.getItem("watchlist")) !== null ? JSON.parse(localStorage.getItem("watchlist")) : [];
   const [modWatchlist, setWatchlist] = useState(watchlist);
   const history = useHistory();
   const openHome = () => {
     history.push("/");
   };
   useEffect(() => {
-    setWatchlist(modWatchlist === undefined ? [] : modWatchlist);
     localStorage.setItem("watchlist", JSON.stringify(modWatchlist));
   });
   /**
@@ -24,7 +23,7 @@ const Watchlist = () => {
    */
   const removeChampion = (event) => {
     const watch = modWatchlist.filter((e) => e.id !== event);
-    setWatchlist(watch, () => { localStorage.setItem("watchlist", JSON.stringify(modWatchlist)); });
+    setWatchlist(watch);
   };
 
   return (
@@ -35,6 +34,7 @@ const Watchlist = () => {
           <div className="col right">
             <button
               type="button"
+              id="openHome"
               className="styledButton"
               onClick={openHome}
             >
@@ -51,8 +51,8 @@ const Watchlist = () => {
               <th>Champion ID</th>
               <th>Name</th>
               <th>Armor</th>
-              <th>armorperlevel</th>
-              <th>hp</th>
+              <th>Armor per Level</th>
+              <th>HP</th>
               <th>Watchlist Action</th>
             </tr>
           </thead>

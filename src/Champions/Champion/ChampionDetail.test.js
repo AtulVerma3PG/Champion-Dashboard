@@ -3,7 +3,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import { createMemoryHistory } from "history";
 import Adapter from "enzyme-adapter-react-16";
-import { shallow, configure } from "enzyme";
+import { shallow, configure, mount } from "enzyme";
 import ChampionDetail from "./ChampionDetail";
 
 configure({ adapter: new Adapter() });

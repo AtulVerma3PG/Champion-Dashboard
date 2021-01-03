@@ -5,52 +5,93 @@ exports[`First Snapshot test 1`] = `
   <nav
     className="navbar navbar-expand navbar-dark bg-dark"
   >
+    <img
+      alt="logo"
+      className="logo"
+      src="championLogo.png"
+    />
     <span
       className="navbar-brand"
     >
-      My Watchlist
+      My Champions Dashboard
     </span>
-    <button
-      className="btn btn-primary btn-lg"
-      onClick={[Function]}
-      type="button"
-    >
-      Home
-    </button>
   </nav>
-  <div
-    className="table-responsive-md"
-  >
-    <table
-      className="table table-bordered table-hover"
+  <div>
+    <div
+      className="container"
     >
-      <thead>
-        <tr>
-          <th>
-            Champion Profile
-          </th>
-          <th>
-            Champion ID
-          </th>
-          <th>
-            Name
-          </th>
-          <th>
-            Armor
-          </th>
-          <th>
-            armorperlevel
-          </th>
-          <th>
-            hp
-          </th>
-          <th>
-            Watchlist Action
-          </th>
-        </tr>
-      </thead>
-      <tbody />
-    </table>
+      <div
+        className="row"
+      >
+        <div
+          className="col left"
+        >
+           
+          <h2
+            className="watchlistHead"
+          >
+            My Watchlist
+          </h2>
+        </div>
+        <div
+          className="col right"
+        >
+          <button
+            className="styledButton"
+            id="openHome"
+            onClick={[Function]}
+            type="button"
+          >
+            Back to Home
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      className="container"
+    >
+      <div
+        className="table-responsive-md"
+      >
+        <table
+          className="table table-bordered table-hover"
+        >
+          <thead>
+            <tr
+              className="center"
+            >
+              <th>
+                Champion Profile
+              </th>
+              <th>
+                Champion ID
+              </th>
+              <th>
+                Name
+              </th>
+              <th>
+                Armor
+              </th>
+              <th>
+                Armor per Level
+              </th>
+              <th>
+                HP
+              </th>
+              <th>
+                Watchlist Action
+              </th>
+            </tr>
+          </thead>
+          <tbody />
+        </table>
+      </div>
+    </div>
   </div>
+  <p
+    className="footer"
+  >
+    Copyright © 2020 , All Rights Reserved.
+  </p>
 </div>
 `;
