@@ -24,8 +24,8 @@ const token = "h1uX-wC3YOCMRJRUGQIXQ2y2vGwEnYlrKYPdrStNUnI01Ew63a4";
 class Champions extends Component {
   constructor(props) {
     super(props);
-    this.state = JSON.parse(localStorage.getItem("state"))
-      ? JSON.parse(localStorage.getItem("state"))
+    this.state = JSON.parse(localStorage.getItem("champion"))
+      ? JSON.parse(localStorage.getItem("champion"))
       : initialState;
   }
 
@@ -45,6 +45,16 @@ class Champions extends Component {
       const { page } = this.state;
       this.setPage(page);
     }
+
+    window.onbeforeunload = () => {
+      if (JSON.parse(window.localStorage.getItem("champion"))) {
+        // last tab closed, perform cleanup.
+        localStorage.removeItem("champion");
+      }
+      if (JSON.parse(window.localStorage.getItem("watchlist"))) {
+        localStorage.removeItem("watchlist");
+      }
+    };
   }
 
   /**
@@ -222,12 +232,12 @@ class Champions extends Component {
    * Update Local storage on state change
    */
   updateLocalStorage() {
-    localStorage.setItem("state", JSON.stringify(this.state));
+    localStorage.setItem("champion", JSON.stringify(this.state));
   }
 
   render() {
     const {
-      articles, visibleArticles, page, pageSize, watchlist, searchedText, sortBy, sortOn, loading,
+      articles, visibleArticles, page, pageSize, searchedText, sortBy, sortOn, loading,
     } = this.state;
     return (
       <div>
@@ -239,9 +249,6 @@ class Champions extends Component {
             page={page}
             pageSize={pageSize}
             setPage={this.setPage}
-            addToWatchList={this.addToWatchList}
-            removeFromWatchlist={this.removeFromWatchlist}
-            watchlist={watchlist}
             openWatchlist={this.openWatchList}
             firstPage={this.setFirstPage}
             lastPage={this.setLastPage}
